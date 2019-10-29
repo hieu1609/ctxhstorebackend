@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mockery\CountValidator\Exception;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use JWTAuth;
-use JWTFactory;
-use App\PasswordReset;
+use Symfony\Component\Mime\Email;
 use App\Notifications\ResetPasswordRequest;
 use App\Notifications\ResetPasswordSuccess;
+use App\PasswordReset;
+use App\User;
 use Carbon\Carbon;
-use Symfony\Component\Mime\Email;
+use JWTFactory;
+use JWTAuth;
+
 
 class AuthController extends BaseApiController
 {
