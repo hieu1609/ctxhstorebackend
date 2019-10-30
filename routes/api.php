@@ -25,8 +25,12 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-//Route Authentication
+//Route Data
 Route::group(['prefix' => 'data'], function () {
     Route::get('getProductCategory', 'DataController@getProductCategory');
     Route::post('getProductByCategoryId', 'DataController@getProductByCategoryId');
+    Route::get('getNewProduct', 'DataController@getNewProduct');
+
+    Route::post('postInforUser', 'DataController@postInforUser');
+    Route::post('postOrderDetail', 'DataController@postOrderDetail');
 });

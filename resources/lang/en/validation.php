@@ -321,6 +321,26 @@ return [
             'required' => 'categoryId_required',
             'integer' => 'categoryId_integer',
         ],
+        'orderId' => [
+            'required' => 'orderId_required',
+            'integer' => 'orderId_integer',
+        ],
+        'productId' => [
+            'required' => 'productId_required',
+            'integer' => 'productId_integer',
+        ],
+        'productName' => [
+            'required' => 'productName_required',
+            'string' => 'productName_string',
+        ],
+        'productPrice' => [
+            'required' => 'productPrice_required',
+            'integer' => 'productPrice_integer',
+        ],
+        'productNumber' => [
+            'required' => 'productNumber_required',
+            'integer' => 'productNumber_integer',
+        ],
     ],
 
     /*

@@ -12,6 +12,11 @@ class OrderTable extends BaseModel
     ];
 
     public static $rules = array(
-
+        'Post_Infor_User' => [
+            'name' => 'required|string',
+            'phone' => 'required|string|regex:/^[0-9\-\+]{9,15}$/',
+            'address' => 'required|string',
+            'email' => 'required|unique:users,email|regex:/^[a-z][a-z0-9_\.]{2,}@[a-z0-9]{2,}(\.[a-z0-9]{2,}){1,2}$/',
+        ],
     );
 }

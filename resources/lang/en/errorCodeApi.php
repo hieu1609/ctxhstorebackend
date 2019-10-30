@@ -166,6 +166,18 @@ $ApiErrorMessages = array(
     'categoryId_required' => 'The category id is required.',
     'categoryId_integer' => 'The category id must be integer.',
 
+    'orderId_required' => 'The order id is required.',
+    'orderId_integer' => 'The order id must be integer.',
+    'productId_required' => 'The product id is required.',
+    'productId_integer' => 'The product id must be integer.',
+    'productName_required' => 'The product name is required.',
+    'productName_string' => 'The product name must be string.',
+    'productPrice_required' => 'The product price is required.',
+    'productPrice_integer' => 'The product price must be integer.',
+    'productNumber_required' => 'The product number is required.',
+    'productNumber_integer' => 'The product number must be integer.',
+    'order_id_not_found' => 'The order id is not found.',
+    'product_id_not_found' => 'The product id is not found.',
 );
 
 $ApiErrorCodes = array(
@@ -328,6 +340,18 @@ $ApiErrorCodes = array(
     'category_id_not_found' => 8020,
     'categoryId_required' => 8021,
     'categoryId_integer' => 8022,
+    'orderId_required' => 8023,
+    'orderId_integer' => 8024,
+    'productId_required' => 8025,
+    'productId_integer' => 8026,
+    'productName_required' => 8027,
+    'productName_string' => 8028,
+    'productPrice_required' => 8029,
+    'productPrice_integer' => 8030,
+    'productNumber_required' => 8031,
+    'productNumber_integer' => 8032,
+    'order_id_not_found' => 8033,
+    'product_id_not_found' => 8034,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;
