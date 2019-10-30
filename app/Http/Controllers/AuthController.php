@@ -128,10 +128,6 @@ class AuthController extends BaseApiController
          *          in="body",
          *          @SWG\Schema(
          *              @SWG\Property(
-         *                  property="username",
-         *                  type="string",
-         *              ),
-         *              @SWG\Property(
          *                  property="email",
          *                  type="string",
          *              ),
@@ -141,6 +137,18 @@ class AuthController extends BaseApiController
          *              ),
          *              @SWG\Property(
          *                  property="confirmPassword",
+         *                  type="string",
+         *              ),
+         *              @SWG\Property(
+         *                  property="name",
+         *                  type="string",
+         *              ),
+         *          @SWG\Property(
+         *                  property="phone",
+         *                  type="string",
+         *              ),
+         *          @SWG\Property(
+         *                  property="address",
          *                  type="string",
          *              ),
          *          ),
@@ -161,8 +169,10 @@ class AuthController extends BaseApiController
 
             $user = new User;
             $user->email = $request->email;
-            $user->username = $request->username;
             $user->password = bcrypt($request->password);
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
             $user->save();
             return $this->responseSuccess("Register_Successfully");
         } catch (\Exception $exception) {

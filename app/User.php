@@ -50,10 +50,12 @@ class User extends BaseModel  implements JWTSubject, Authenticatable
     }
     public static $rules = array(
         'Rule_Create_User' => [
-            'username' => 'required|min:3|max:30|string',
             'email' => 'required|unique:users,email|regex:/^[a-z][a-z0-9_\.]{2,}@[a-z0-9]{2,}(\.[a-z0-9]{2,}){1,2}$/',
             'password' => 'required|string|min:6|max:16',
             'confirmPassword' => 'required|same:password',
+            'name' => 'required|string',
+            'phone' => 'required|string|regex:/^[0-9\-\+]{9,15}$/',
+            'address' => 'required|string',
         ],
         'Rule_Signin' => [
             'email' => 'required|regex:/^[a-z][a-z0-9_\.]{2,}@[a-z0-9]{2,}(\.[a-z0-9]{2,}){1,2}$/',

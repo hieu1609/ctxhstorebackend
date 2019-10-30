@@ -24,3 +24,9 @@ Route::group(['prefix' => 'auth'], function () {
         Route::post('logout', 'AuthController@logout');
     });
 });
+
+//Route Authentication
+Route::group(['prefix' => 'data'], function () {
+    Route::get('getProductCategory', 'DataController@getProductCategory');
+    Route::post('getProductByCategoryId', 'DataController@getProductByCategoryId');
+});
