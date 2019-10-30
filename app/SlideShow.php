@@ -14,4 +14,9 @@ class SlideShow extends BaseModel
     public static $rules = array(
 
     );
+    public static function getSlideShow() {
+        return SlideShow::orderBy('id', 'desc')
+        ->limit(5)
+        ->get();
+    }
 }
