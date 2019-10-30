@@ -22,4 +22,10 @@ class Product extends BaseModel
         ->orderBy('id')
         ->get();
     }
+
+    public static function getNewProduct() {
+        return Product::limit(6)
+        ->orderBy('id', 'desc')
+        ->get();
+    }
 }

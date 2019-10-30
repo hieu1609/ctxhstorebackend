@@ -12,6 +12,12 @@ class OrderDetail extends BaseModel
     ];
 
     public static $rules = array(
-
+        'Post_Order_Detail' => [
+            'orderId' => 'required|integer',
+            'productId' => 'required|integer',
+            'productName' => 'required|string',
+            'productPrice' => 'required|integer',
+            'productNumber' => 'required|integer',
+        ],
     );
 }
