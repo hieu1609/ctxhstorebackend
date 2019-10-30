@@ -303,7 +303,24 @@ return [
         ],
         'keySearch' => [
             'string' => 'keySearch_string'
-        ]
+        ],
+        'name' => [
+            'required' => 'name_required',
+            'string' => 'name_string',
+        ],
+        'phone' => [
+            'required' => 'phone_required',
+            'string' => 'phone_string',
+            'regex' => 'phone_regex',
+        ],
+        'address' => [
+            'required' => 'address_required',
+            'string' => 'address_string',
+        ],
+        'categoryId' => [
+            'required' => 'categoryId_required',
+            'integer' => 'categoryId_integer',
+        ],
     ],
 
     /*

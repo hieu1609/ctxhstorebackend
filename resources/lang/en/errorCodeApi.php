@@ -154,7 +154,17 @@ $ApiErrorMessages = array(
     'fieldSort_not_found' => 'Field Sort not found',
     'fieldSearch_not_found' => 'Field Search not found',
 
-
+    //data controller
+    'name_required' => 'The name is required.',
+    'name_string' => 'The name must be string.',
+    'phone_required' => 'The phone number is required.',
+    'phone_string' => 'The phone number must be string.',
+    'phone_regex' => 'The phone number format is invalid.',
+    'address_required' => 'The address is required.',
+    'address_string' => 'The email must be string.',
+    'category_id_not_found' => 'The category id is not found.',
+    'categoryId_required' => 'The category id is required.',
+    'categoryId_integer' => 'The category id must be integer.',
 
 );
 
@@ -307,6 +317,17 @@ $ApiErrorCodes = array(
     'users_available' => 8004, //when send request create user
     'fieldSort_not_found' => 8011,
     'fieldSearch_not_found' => 8012,
+
+    'name_required' => 8013,
+    'name_string' => 8014,
+    'phone_required' => 8015,
+    'phone_string' => 8016,
+    'phone_regex' => 8017,
+    'address_required' => 8018,
+    'address_string' => 8019,
+    'category_id_not_found' => 8020,
+    'categoryId_required' => 8021,
+    'categoryId_integer' => 8022,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;

@@ -14,4 +14,9 @@ class ProductCategory extends BaseModel
     public static $rules = array(
 
     );
+
+    public static function getProductCategory() {
+        return ProductCategory::orderBy('id')
+        ->get();
+    }
 }

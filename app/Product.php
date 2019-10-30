@@ -12,6 +12,14 @@ class Product extends BaseModel
     ];
 
     public static $rules = array(
-
+        'Get_Product' => [
+            'categoryId' => 'required|integer'
+        ],
     );
+
+    public static function getProductByCategoryId($categoryId) {
+        return Product::where('id_category', $categoryId)
+        ->orderBy('id')
+        ->get();
+    }
 }

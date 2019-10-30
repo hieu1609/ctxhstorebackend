@@ -4,7 +4,7 @@
         "title": "L5 Swagger API",
         "version": "1.0.0"
     },
-    "host": "localhost:800/hydroponic/BackEnd/blog/public",
+    "host": "localhost:800/ctxhstore/public",
     "basePath": "/api",
     "schemes": [
         "http",
@@ -101,9 +101,6 @@
                         "required": true,
                         "schema": {
                             "properties": {
-                                "username": {
-                                    "type": "string"
-                                },
                                 "email": {
                                     "type": "string"
                                 },
@@ -111,6 +108,15 @@
                                     "type": "string"
                                 },
                                 "confirmPassword": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "address": {
                                     "type": "string"
                                 }
                             }
@@ -269,6 +275,67 @@
                     },
                     "404": {
                         "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/data/getProductCategory": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "get product category",
+                "description": "get product category",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/data/getProductByCategoryId": {
+            "post": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Get product by category id",
+                "description": "Get product by category id",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Get product by category id",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "categoryId": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
                     },
                     "500": {
                         "description": "Internal Server Error"
