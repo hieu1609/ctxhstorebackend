@@ -468,6 +468,26 @@
                     }
                 }
             }
+        },
+        "/data/getSlideShow": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "get slide show",
+                "description": "get slide show",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
         }
     },
     "definitions": {},

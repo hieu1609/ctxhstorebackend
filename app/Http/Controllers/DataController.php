@@ -7,6 +7,7 @@ use App\ProductCategory;
 use App\Product;
 use App\OrderTable;
 use App\OrderDetail;
+use App\SlideShow;
 
 class DataController extends BaseApiController
 {
@@ -228,6 +229,28 @@ class DataController extends BaseApiController
             return $this->responseSuccess("Post order table successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    /**
+     * @SWG\Get(
+     *     path="/data/getSlideShow",
+     *     description="get slide show",
+     *     tags={"Data"},
+     *     summary="get slide show",
+     *
+     *      @SWG\Response(response=200, description="Successful operation"),
+     *      @SWG\Response(response=401, description="Unauthorized"),
+     *      @SWG\Response(response=500, description="Internal Server Error"),
+     * )
+     */
+    public function getSlideShow(Request $request)
+    {
+        try {
+            $dataSlideShow = SlideShow::getSlideShow();
+            return $this->responseSuccess($dataSlideShow);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }
     }
 }

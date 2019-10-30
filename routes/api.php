@@ -27,10 +27,15 @@ Route::group(['prefix' => 'auth'], function () {
 
 //Route Data
 Route::group(['prefix' => 'data'], function () {
+    //Product
     Route::get('getProductCategory', 'DataController@getProductCategory');
     Route::post('getProductByCategoryId', 'DataController@getProductByCategoryId');
     Route::get('getNewProduct', 'DataController@getNewProduct');
 
+    //Order
     Route::post('postInforUser', 'DataController@postInforUser');
     Route::post('postOrderDetail', 'DataController@postOrderDetail');
+
+    //Slide show
+    Route::get('getSlideShow', 'DataController@getSlideShow');
 });

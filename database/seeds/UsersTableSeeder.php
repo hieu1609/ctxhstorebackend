@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('string'),
                 "name"=> "Đức",
                 'phone' => '0942013068',
-                'address' => 'Buôn Hô, Đắc Lắk',
+                'address' => 'Buôn Hô, Đắk Lắk',
                 "admin"=> 0,
                 "created_at"=> "2019-08-28 03:12:34",
                 "updated_at"=> "2019-08-28 03:12:34"
