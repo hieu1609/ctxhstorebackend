@@ -17,14 +17,17 @@ class Product extends BaseModel
         ],
     );
 
-    public static function getProductByCategoryId($categoryId) {
+    public static function getProductByCategoryId($categoryId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return Product::where('id_category', $categoryId)
-        ->orderBy('id')
+        ->limit($limit)
+        ->offset($space)
         ->get();
     }
 
     public static function getNewProduct() {
-        return Product::limit(6)
+        return Product::limit(8)
         ->orderBy('id', 'desc')
         ->get();
     }

@@ -319,6 +319,9 @@
                             "properties": {
                                 "categoryId": {
                                     "type": "integer"
+                                },
+                                "page": {
+                                    "type": "integer"
                                 }
                             }
                         }
