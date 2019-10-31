@@ -160,7 +160,7 @@ class DataController extends BaseApiController
             $userInfor->email = $request->email;
             $userInfor->user = $request->user;
             $userInfor->save();
-            return $this->responseSuccess("Post order table successfully");
+            return $this->responseSuccess(OrderTable::getOrderId());
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
         }
