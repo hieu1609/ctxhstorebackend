@@ -19,4 +19,10 @@ class OrderTable extends BaseModel
             'email' => 'required|unique:users,email|regex:/^[a-z][a-z0-9_\.]{2,}@[a-z0-9]{2,}(\.[a-z0-9]{2,}){1,2}$/',
         ],
     );
+    public static function getOrderId() {
+        return OrderTable::select('id')
+        ->orderBy('id', 'desc')
+        ->limit(1)
+        ->get();
+    }
 }

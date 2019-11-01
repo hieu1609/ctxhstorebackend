@@ -42,7 +42,7 @@ class ProductTableSeeder extends Seeder
             [
                 'product_name' => 'Xoài lắc',
                 'price' => 12000,
-                'product_image' => 'https://i.ibb.co/4FqypcB/xo-i-l-c.jpg',
+                'product_image' => 'https://i.ibb.co/9YgbZ6k/xoailac.jpg',
                 'description' => 'Nguyên liệu: xoài, muối, ớt, tôm khô,..
                 Hương vị: chua, cay, mặn, ngọt.
                 Hạn sử dụng: 1 ngày
