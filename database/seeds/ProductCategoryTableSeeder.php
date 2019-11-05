@@ -20,7 +20,7 @@ class ProductCategoryTableSeeder extends Seeder
                 "updated_at"=> "2019-08-28 03:12:33"
             ],
             [
-                'category_name' => 'Thức uống',
+                'category_name' => 'Đồ uống',
                 'category_image' => 'https://i.ibb.co/L9mR216/glass.png',
                 "created_at"=> "2019-08-28 03:12:34",
                 "updated_at"=> "2019-08-28 03:12:34"
