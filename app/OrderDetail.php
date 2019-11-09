@@ -8,7 +8,7 @@ class OrderDetail extends BaseModel
 {
     protected $table = 'order_detail';
     protected $fillable = [
-        'order_id', 'product_id', 'product_name', 'product_price', 'product_number',
+        'order_id', 'product_id', 'product_name', 'product_price', 'product_number',  'confirm', 'shipping', 'success',
     ];
 
     public static $rules = array(
