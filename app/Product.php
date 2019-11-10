@@ -8,7 +8,7 @@ class Product extends BaseModel
 {
     protected $table = 'product';
     protected $fillable = [
-        'product_name', 'price', 'product_image', 'description', 'id_category',
+        'product_name', 'price', 'product_image', 'description', 'category_id',
     ];
 
     public static $rules = array(
@@ -20,7 +20,7 @@ class Product extends BaseModel
     public static function getProductByCategoryId($categoryId, $page) {
         $limit = 5;
         $space = ($page - 1) * $limit;
-        return Product::where('id_category', $categoryId)
+        return Product::where('category_id', $categoryId)
         ->limit($limit)
         ->offset($space)
         ->get();
