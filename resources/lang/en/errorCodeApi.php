@@ -178,6 +178,9 @@ $ApiErrorMessages = array(
     'productNumber_integer' => 'The product number must be integer.',
     'order_id_not_found' => 'The order id is not found.',
     'product_id_not_found' => 'The product id is not found.',
+    'rating_incorrect' => 'The rating incorrect.',
+    'rating_required' => 'The rating is required.',
+    'rating_integer' => 'The rating must be integer.',
 );
 
 $ApiErrorCodes = array(
@@ -352,6 +355,9 @@ $ApiErrorCodes = array(
     'productNumber_integer' => 8032,
     'order_id_not_found' => 8033,
     'product_id_not_found' => 8034,
+    'rating_incorrect' => 8035,
+    'rating_required' => 8036,
+    'rating_integer' => 8037,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;
