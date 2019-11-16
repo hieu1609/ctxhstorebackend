@@ -12,7 +12,19 @@ class ProductReviews extends BaseModel
     ];
 
     public static $rules = array(
-
+        'Post_Review' => [
+            'productId' => 'required|integer',
+            'rating' => 'required|integer',
+        ],
     );
 
+    public static function getAVGRatingProduct($productId) {
+        return ProductReviews::where('product_id', $productId)
+        ->avg('rating');
+    }
+
+    public static function getCommentByProductId($productId) {
+        return ProductReviews::where('product_id', $productId)
+        ->get();
+    }
 }

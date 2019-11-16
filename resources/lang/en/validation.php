@@ -341,6 +341,10 @@ return [
             'required' => 'productNumber_required',
             'integer' => 'productNumber_integer',
         ],
+        'rating' => [
+            'required' => 'rating_required',
+            'integer' => 'rating_integer',
+        ],
     ],
 
     /*

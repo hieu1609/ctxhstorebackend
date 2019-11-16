@@ -95,5 +95,10 @@ class User extends BaseModel  implements JWTSubject, Authenticatable
             'active' => 'boolean',
             'admin' => 'boolean'
         ],
+        'Edit_User_Profile' => [
+            'name' => 'required|string',
+            'phone' => 'required|string|regex:/^[0-9\-\+]{9,15}$/',
+            'address' => 'required|string',
+        ],
     );
 }

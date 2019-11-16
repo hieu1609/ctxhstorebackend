@@ -31,6 +31,7 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('getProductCategory', 'DataController@getProductCategory');
     Route::post('getProductByCategoryId', 'DataController@getProductByCategoryId');
     Route::get('getNewProduct', 'DataController@getNewProduct');
+    Route::post('getCommentByProductId', 'DataController@getCommentByProductId');
 
     //Order
     Route::post('postInforUser', 'DataController@postInforUser');
@@ -38,4 +39,12 @@ Route::group(['prefix' => 'data'], function () {
 
     //Slide show
     Route::get('getSlideShow', 'DataController@getSlideShow');
+});
+
+//Route User
+Route::group(['prefix' => 'user'], function () {
+    Route::group(['middleware' => ['jwt']], function () {
+        Route::put('editUserProfile', 'UserController@editUserProfile');
+        Route::post('postReview', 'UserController@postReview');
+    });
 });

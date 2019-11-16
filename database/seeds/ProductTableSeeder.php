@@ -23,6 +23,7 @@ Hạn sử dụng: 1 tuần
 Bánh tráng me là sản phẩm được biến tấu từ bánh tráng muối, từ đây người Tây Ninh sẽ tạo ra những món mới từ nhiều nguyên liệu trộn lại nhưng muối là nguyên liệu chính. Bánh tráng me gồm bánh tráng phơi sương ăn kèm với các nguyên liệu và nước muối me tạo ra vị chua và cay khó tả.
 Bánh tráng me là món Bánh Tráng Tây Ninh được các bạn trẻ ưa chuộng bởi sự thơm ngon và tính tiện dụng. Đây cũng là sản phẩm nằm trong top bán chạy nhất của shop. Sản phẩm thường được khách du lịch ưa chuộng và mua về làm quà cho người thân, bạn bè.',
                 'category_id' => 1,
+                'rating' => 3,
                 "created_at"=> "2019-08-28 03:12:33",
                 "updated_at"=> "2019-08-28 03:12:33"
             ],
@@ -36,6 +37,7 @@ Hạn sử dụng: 1 tuần
 Với công thức đơn giản nhưng siêu nghiền - nghiện - chắc chắn ăn 1 lần bạn sẽ muốn ăn nữa thôi. Bánh tráng gói nhỏ ăn lai rai có hành phô phi, sate, mối tôm và gia vị nêm nếm vừa vặn. Các bạn mở ra ăn ngay hoặc mix với xoài, rau răm, quất, chanh tuỳ khẩu vị nhé
 Đảm bảo ăn 1 lần là nghiện luôn á. Vị cay cay thơm thơm ngọt ngọt của bánh tráng sẽ luôn làm ta nhớ đến bánh tráng đặc sản Tây Ninh.',
                 'category_id' => 1,
+                'rating' => 5,
                 "created_at"=> "2019-08-28 03:12:34",
                 "updated_at"=> "2019-08-28 03:12:34"
             ],
@@ -49,6 +51,7 @@ Hạn sử dụng: 1 ngày
 Xoài Lắc là món ăn vặt gây sốt sình sịch có vị chua, cay, mặn, ngọt rất kích thích. Cách làm xoài lắc đơn giản, dùng loại xoài keo chín hường, trộn cùng muối tôm, đường, nước mắm, ớt bột theo một tỉ lệ ngon bất bại.
 Cùng nhanh tay đặt cho mình ly xoài lắc thơm ngon khó cưỡng này ngay nhé!',
                 'category_id' => 1,
+                'rating' => 4.50,
                 "created_at"=> "2019-08-28 03:12:35",
                 "updated_at"=> "2019-08-28 03:12:35"
             ],
@@ -63,6 +66,7 @@ Sản xuất: CTXH
 Rau câu dừa béo là món tráng miệng và ăn vặt mát lạnh, giúp giải nhiệt mùa hè cực hấp dẫn. Cách làm rau câu dừa đơn giản với nguyên liệu rẻ và dễ tìm, rất thích hợp cho những bạn mới tập tành đổ rau câu tại nhà. Hãy tưởng tượng cắn một miếng thạch rau câu dừa tự làm, vị dẻo thơm và béo ngậy lan tỏa trong miệng, chắc chắn khiến bạn không thể nào ngừng.
 Rau câu có 2 lớp: rau câu nước dừa và rau câu nước cốt dừa. Hương vị ngọt ngào, thơm mát hấp dẫn, còn cung cấp chất khoáng và vitamin thiết yếu cho cơ thể. Thiết kế hủ nhỏ xin, tiện lợi để thưởng thức.',
                 'category_id' => 1,
+                'rating' => 4,
                 "created_at"=> "2019-08-28 03:12:36",
                 "updated_at"=> "2019-08-28 03:12:36"
             ],
