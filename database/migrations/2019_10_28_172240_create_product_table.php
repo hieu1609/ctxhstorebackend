@@ -19,9 +19,10 @@ class CreateProductTable extends Migration
             $table->integer('price');
             $table->string('product_image', 500);
             $table->string('description', 1500);
-            $table->integer('id_category')->unsigned()->index();
+            $table->integer('category_id')->unsigned()->index();
+            $table->float('rating', 8, 2)->nullable();
             $table->timestamps();
-            $table->foreign('id_category')->references('id')->on('product_category');
+            $table->foreign('category_id')->references('id')->on('product_category');
         });
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProductCategory;
+use App\ProductReviews;
 use App\Product;
 use App\OrderTable;
 use App\OrderDetail;
@@ -253,6 +254,42 @@ class DataController extends BaseApiController
         try {
             $dataSlideShow = SlideShow::getSlideShow();
             return $this->responseSuccess($dataSlideShow);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
+        }
+    }
+
+    /**
+     * @SWG\Post(
+     *     path="/data/getCommentByProductId",
+     *     description="Get comment by category id",
+     *     tags={"Data"},
+     *     summary="Get comment by category id",
+     *
+     *      @SWG\Parameter(
+     *          name="body",
+     *          description="Get comment by category id",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(
+     *              @SWG\property(
+     *                  property="productId",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
+     *      @SWG\Response(response=200, description="Successful operation"),
+     *      @SWG\Response(response=401, description="Unauthorized"),
+     *      @SWG\Response(response=403, description="Forbidden"),
+     *      @SWG\Response(response=422, description="Unprocessable Entity"),
+     *      @SWG\Response(response=500, description="Internal Server Error"),
+     * )
+     */
+    public function getCommentByProductId(Request $request)
+    {
+        try {
+            $comment = ProductReviews::getCommentByProductId($request->productId);
+            return $this->responseSuccess($comment);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }

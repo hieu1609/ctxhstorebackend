@@ -20,6 +20,9 @@ class CreateOrderDetailTable extends Migration
             $table->string('product_name', 255);
             $table->integer('product_price');
             $table->integer('product_number');
+            $table->boolean('confirm')->default(0);
+            $table->boolean('shipping')->default(0);
+            $table->boolean('success')->default(0);
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('order_table');
             $table->foreign('product_id')->references('id')->on('product');
