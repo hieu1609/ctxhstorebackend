@@ -143,11 +143,11 @@ class AuthController extends BaseApiController
          *                  property="name",
          *                  type="string",
          *              ),
-         *          @SWG\Property(
+         *              @SWG\Property(
          *                  property="phone",
          *                  type="string",
          *              ),
-         *          @SWG\Property(
+         *              @SWG\Property(
          *                  property="address",
          *                  type="string",
          *              ),
@@ -174,7 +174,7 @@ class AuthController extends BaseApiController
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->save();
-            return $this->responseSuccess("Register_Successfully");
+            return $this->responseSuccess("Register successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }
