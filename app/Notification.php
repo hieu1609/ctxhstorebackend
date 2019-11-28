@@ -24,6 +24,10 @@ class Notification extends BaseModel
         'Seen_Notification' => [
             'notificationId' => 'required|integer'
         ],
+        'Send_Notification_All_Users' => [
+            'notificationTitle' => 'required|string|max:50',
+            'notificationContent' => 'required|string|max:2000'
+        ],
         'Edit_Notification' => [
             'notificationId' => 'required|integer',
             'userIdSend' => 'required|integer',
