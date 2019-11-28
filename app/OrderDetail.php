@@ -19,5 +19,50 @@ class OrderDetail extends BaseModel
             'productPrice' => 'required|integer',
             'productNumber' => 'required|integer',
         ],
+        'Cancel_Order' => [
+            'orderId' => 'required|integer',
+        ],
     );
+
+    public static function getAllPurchases($userId) {
+        return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
+        ->where('order_table.user', $userId)
+        ->get();
+    }
+
+    public static function getPurchasesReceived($userId) {
+        return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
+        ->where('order_table.user', $userId)
+        ->where('order_detail.confirm', 0)
+        ->where('order_detail.shipping', 0)
+        ->where('order_detail.success', 0)
+        ->get();
+    }
+
+    public static function getPurchasesConfirm($userId) {
+        return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
+        ->where('order_table.user', $userId)
+        ->where('order_detail.confirm', 1)
+        ->where('order_detail.shipping', 0)
+        ->where('order_detail.success', 0)
+        ->get();
+    }
+
+    public static function getPurchasesShipping($userId) {
+        return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
+        ->where('order_table.user', $userId)
+        ->where('order_detail.confirm', 1)
+        ->where('order_detail.shipping', 1)
+        ->where('order_detail.success', 0)
+        ->get();
+    }
+
+    public static function getPurchasesCompleted($userId) {
+        return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
+        ->where('order_table.user', $userId)
+        ->where('order_detail.confirm', 1)
+        ->where('order_detail.shipping', 1)
+        ->where('order_detail.success', 1)
+        ->get();
+    }
 }
