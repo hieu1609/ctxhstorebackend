@@ -40,7 +40,6 @@ class DataController extends BaseApiController
      *     description="Get product by category id",
      *     tags={"Data"},
      *     summary="Get product by category id",
-     *
      *      @SWG\Parameter(
      *          name="body",
      *          description="Get product by category id",

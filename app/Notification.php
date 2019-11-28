@@ -39,10 +39,17 @@ class Notification extends BaseModel
         'Delete_Notification' => [
             'notificationId' => 'required|integer'
         ],
+        'Get_Notifications_Admin' => [
+            'page' => 'required|integer'
+        ],
     );
 
-    public static function getAllNotifications() {
+    public static function getNotificationsAdmin($page) {
+        $limit = 10;
+        $space = ($page - 1) * $limit;
         return Notification::orderBy('id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get();
     }
 
