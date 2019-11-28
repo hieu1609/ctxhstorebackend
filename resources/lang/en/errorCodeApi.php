@@ -181,6 +181,8 @@ $ApiErrorMessages = array(
     'rating_incorrect' => 'The rating incorrect.',
     'rating_required' => 'The rating is required.',
     'rating_integer' => 'The rating must be integer.',
+    'order_id_not_found' => 'The order id not found.',
+    'cannot_cancel_order' => 'Cannot cancel order.',
 );
 
 $ApiErrorCodes = array(
@@ -358,6 +360,8 @@ $ApiErrorCodes = array(
     'rating_incorrect' => 8035,
     'rating_required' => 8036,
     'rating_integer' => 8037,
+    'order_id_not_found' => 8038,
+    'cannot_cancel_order' => 8039,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;
