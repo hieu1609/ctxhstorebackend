@@ -46,6 +46,12 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => ['jwt']], function () {
         Route::put('editUserProfile', 'UserController@editUserProfile');
         Route::post('postReview', 'UserController@postReview');
+        Route::get('getAllPurchases', 'UserController@getAllPurchases');
+        Route::get('getPurchasesReceived', 'UserController@getPurchasesReceived');
+        Route::get('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
+        Route::get('getPurchasesShipping', 'UserController@getPurchasesShipping');
+        Route::get('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
+        Route::delete('CancelOrder', 'UserController@CancelOrder');
     });
 });
 
