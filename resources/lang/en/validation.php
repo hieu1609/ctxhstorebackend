@@ -345,6 +345,30 @@ return [
             'required' => 'rating_required',
             'integer' => 'rating_integer',
         ],
+        'productImage' => [
+            'required' => 'productImage_required',
+            'string' => 'productImage_string',
+        ],
+        'description' => [
+            'required' => 'description_required',
+            'string' => 'description_string',
+        ],
+        'page' => [
+            'required' => 'page_required',
+            'integer' => 'page_integer',
+        ],
+        'image' => [
+            'required' => 'image_required',
+            'string' => 'image_string',
+        ],
+        'title' => [
+            'required' => 'title_required',
+            'string' => 'title_string',
+        ],
+        'slideShowId' => [
+            'required' => 'slideShowId_required',
+            'integer' => 'slideShowId_integer',
+        ],
     ],
 
     /*
