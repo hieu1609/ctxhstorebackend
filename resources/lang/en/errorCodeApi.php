@@ -178,6 +178,24 @@ $ApiErrorMessages = array(
     'productNumber_integer' => 'The product number must be integer.',
     'order_id_not_found' => 'The order id is not found.',
     'product_id_not_found' => 'The product id is not found.',
+    'rating_incorrect' => 'The rating incorrect.',
+    'rating_required' => 'The rating is required.',
+    'rating_integer' => 'The rating must be integer.',
+    'order_id_not_found' => 'The order id not found.',
+    'cannot_cancel_order' => 'Cannot cancel order.',
+    'productImage_required' => 'The product image is required.',
+    'productImage_string' => 'The product image must be string.',
+    'description_required' => 'The description is required.',
+    'description_string' => 'The description must be string.',
+    'page_required' => 'The page is required.',
+    'page_integer' => 'The page must be integer.',
+    'image_required' => 'The image is required.',
+    'image_string' => 'The image must be string.',
+    'title_required' => 'The title is required.',
+    'title_string' => 'The title must be string.',
+    'slideShowId_required' => 'The slide show id is required.',
+    'slideShowId_integer' => 'The slide show id must be integer.',
+    'slide_show_id_not_found' => 'The slide show id not found.',
 );
 
 $ApiErrorCodes = array(
@@ -321,6 +339,21 @@ $ApiErrorCodes = array(
     'TypeSort_in' => 3361,
     'fieldSearch_string' => 3371,
     'keySearch_string' => 3381,
+
+    'productImage_required' =>  3382,
+    'productImage_string' => 3383,
+    'description_required' => 3384,
+    'description_string' => 3385,
+
+    'page_required' => 3386,
+    'page_integer' => 3387,
+    'image_required' => 3388,
+    'image_string' => 3389,
+    'title_required' => 3390,
+    'title_string' => 3391,
+    'slideShowId_required' => 3392,
+    'slideShowId_integer' => 3393,
+
     //custom error
     'email_password_invalid' => 8000,
     'user_password_invalid' => 8001,
@@ -352,6 +385,12 @@ $ApiErrorCodes = array(
     'productNumber_integer' => 8032,
     'order_id_not_found' => 8033,
     'product_id_not_found' => 8034,
+    'rating_incorrect' => 8035,
+    'rating_required' => 8036,
+    'rating_integer' => 8037,
+    'order_id_not_found' => 8038,
+    'cannot_cancel_order' => 8039,
+    'slide_show_id_not_found' => 8040,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;

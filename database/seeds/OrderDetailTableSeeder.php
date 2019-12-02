@@ -33,6 +33,16 @@ class OrderDetailTableSeeder extends Seeder
 
             ],
             [
+                'order_id' => 2,
+                'product_id' => 5,
+                'product_name' => 'Cơm cháy',
+                'product_price' => 24000,
+                'product_number' => 3,
+                "created_at"=> "2019-08-29 03:12:38",
+                "updated_at"=> "2019-08-29 03:12:38"
+
+            ],
+            [
                 'order_id' => 3,
                 'product_id' => 22,
                 'product_name' => 'Mô hình 3D',

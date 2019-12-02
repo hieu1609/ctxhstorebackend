@@ -24,6 +24,10 @@ class Notification extends BaseModel
         'Seen_Notification' => [
             'notificationId' => 'required|integer'
         ],
+        'Send_Notification_All_Users' => [
+            'notificationTitle' => 'required|string|max:50',
+            'notificationContent' => 'required|string|max:2000'
+        ],
         'Edit_Notification' => [
             'notificationId' => 'required|integer',
             'userIdSend' => 'required|integer',
@@ -35,10 +39,17 @@ class Notification extends BaseModel
         'Delete_Notification' => [
             'notificationId' => 'required|integer'
         ],
+        'Get_Notifications_Admin' => [
+            'page' => 'required|integer'
+        ],
     );
 
-    public static function getAllNotifications() {
+    public static function getNotificationsAdmin($page) {
+        $limit = 10;
+        $space = ($page - 1) * $limit;
         return Notification::orderBy('id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get();
     }
 
