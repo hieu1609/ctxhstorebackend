@@ -45,35 +45,12 @@ class AdminController extends BaseApiController
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
-            $result = SlideShow::getSlideShowAdmin($request->page);
+            $result['data'] = SlideShow::getSlideShowAdmin($request->page);
+            $result['numPage'] = ceil(SlideShow::count()/10);
+            $result['total'] = SlideShow::count();
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
-        }
-    }
-
-    public function getSlideShowPageNumber()
-    {
-        /**
-         * @SWG\Get(
-         *     path="/admin/getSlideShowPageNumber",
-         *     description="Get slide show page number",
-         *     tags={"Admin"},
-         *     summary="Get slide show page number",
-         *     security={{"jwt":{}}},
-         *      @SWG\Response(response=200, description="Successful"),
-         *      @SWG\Response(response=401, description="Unauthorized"),
-         *      @SWG\Response(response=403, description="Forbidden"),
-         *      @SWG\Response(response=422, description="Unprocessable Entity"),
-         *      @SWG\Response(response=500, description="Internal Server Error"),
-         * )
-         */
-
-        try {
-            $result = ceil(SlideShow::count()/10);
-            return $this->responseSuccess($result);
-        } catch (\Exception $exception) {
-            return $this->responseErrorException($exception->getMessage(), 99999, 500);
         }
     }
 
@@ -232,6 +209,49 @@ class AdminController extends BaseApiController
             return $this->responseSuccess("Delete slide show successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getUserAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getUserAdmin",
+         *     description="Get user",
+         *     tags={"Admin"},
+         *     summary="Get user",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get user",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = User::validate($request->all(), 'Get_User_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result['data'] = User::getUserAdmin($request->page);
+            $result['numPage'] = ceil(User::count()/10);
+            $result['total'] = User::count();
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }
     }
 
@@ -525,34 +545,6 @@ class AdminController extends BaseApiController
         }
     }
 
-    public function getStatistic()
-    {
-        /**
-         * @SWG\Get(
-         *     path="/admin/statistic",
-         *     description="Get Statistic",
-         *     tags={"Admin"},
-         *     summary="Get Statistic",
-         *     security={{"jwt":{}}},
-         *      @SWG\Response(response=200, description="Successful"),
-         *      @SWG\Response(response=401, description="Unauthorized"),
-         *      @SWG\Response(response=403, description="Forbidden"),
-         *      @SWG\Response(response=422, description="Unprocessable Entity"),
-         *      @SWG\Response(response=500, description="Internal Server Error"),
-         * )
-         */
-
-        try {
-            $result = [
-                'account' => User::count(),
-            ];
-
-            return $this->responseSuccess($result);
-        } catch (\Exception $exception) {
-            return $this->responseErrorException($exception->getMessage(), 99999, 500);
-        }
-    }
-
     public function getNotificationsAdmin(Request $request)
     {
         /**
@@ -587,35 +579,12 @@ class AdminController extends BaseApiController
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
-            $result = Notification::getNotificationsAdmin($request->page);
+            $result['data'] = Notification::getNotificationsAdmin($request->page);
+            $result['numPage'] = ceil(Notification::count()/10);
+            $result['total'] = Notification::count();
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
-        }
-    }
-
-    public function getNotificationsPageNumber()
-    {
-        /**
-         * @SWG\Get(
-         *     path="/admin/getNotificationsPageNumber",
-         *     description="Get notifications page number",
-         *     tags={"Admin"},
-         *     summary="Get notifications page number",
-         *     security={{"jwt":{}}},
-         *      @SWG\Response(response=200, description="Successful"),
-         *      @SWG\Response(response=401, description="Unauthorized"),
-         *      @SWG\Response(response=403, description="Forbidden"),
-         *      @SWG\Response(response=422, description="Unprocessable Entity"),
-         *      @SWG\Response(response=500, description="Internal Server Error"),
-         * )
-         */
-
-        try {
-            $result = ceil(Notification::count()/10);
-            return $this->responseSuccess($result);
-        } catch (\Exception $exception) {
-            return $this->responseErrorException($exception->getMessage(), 99999, 500);
         }
     }
 
@@ -872,6 +841,49 @@ class AdminController extends BaseApiController
         }
     }
 
+    public function getProductAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getProductAdmin",
+         *     description="Get product",
+         *     tags={"Admin"},
+         *     summary="Get product",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get product",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = Product::validate($request->all(), 'Get_Product_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result['data'] = Product::getProductAdmin($request->page);
+            $result['numPage'] = ceil(Product::count()/10);
+            $result['total'] = Product::count();
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
     public function addProduct(Request $request)
     {
         /**
@@ -1061,71 +1073,6 @@ class AdminController extends BaseApiController
 
             $checkProductId->delete();
             return $this->responseSuccess("Delete product successfully");
-        } catch (\Exception $exception) {
-            return $this->responseErrorException($exception->getMessage(), 99999, 500);
-        }
-    }
-
-    public function getProductAdmin(Request $request)
-    {
-        /**
-         * @SWG\Post(
-         *     path="/admin/getProductAdmin",
-         *     description="Get product",
-         *     tags={"Admin"},
-         *     summary="Get product",
-         *     security={{"jwt":{}}},
-         *      @SWG\Parameter(
-         *          name="body",
-         *          description="Get product",
-         *          required=true,
-         *          in="body",
-         *          @SWG\Schema(
-         *              @SWG\property(
-         *                  property="page",
-         *                  type="integer",
-         *              ),
-         *          ),
-         *      ),
-         *      @SWG\Response(response=200, description="Successful operation"),
-         *      @SWG\Response(response=401, description="Unauthorized"),
-         *      @SWG\Response(response=403, description="Forbidden"),
-         *      @SWG\Response(response=422, description="Unprocessable Entity"),
-         *      @SWG\Response(response=500, description="Internal Server Error"),
-         * )
-         */
-
-        try {
-            $validator = Product::validate($request->all(), 'Get_Product_Admin');
-            if ($validator) {
-                return $this->responseErrorValidator($validator, 422);
-            }
-            $result = Product::getProductAdmin($request->page);
-            return $this->responseSuccess($result);
-        } catch (\Exception $exception) {
-            return $this->responseErrorException($exception->getMessage(), 99999, 500);
-        }
-    }
-    public function getProductPageNumber()
-    {
-        /**
-         * @SWG\Get(
-         *     path="/admin/getProductPageNumber",
-         *     description="Get product page number",
-         *     tags={"Admin"},
-         *     summary="Get product page number",
-         *     security={{"jwt":{}}},
-         *      @SWG\Response(response=200, description="Successful"),
-         *      @SWG\Response(response=401, description="Unauthorized"),
-         *      @SWG\Response(response=403, description="Forbidden"),
-         *      @SWG\Response(response=422, description="Unprocessable Entity"),
-         *      @SWG\Response(response=500, description="Internal Server Error"),
-         * )
-         */
-
-        try {
-            $result = ceil(Product::count()/10);
-            return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
         }

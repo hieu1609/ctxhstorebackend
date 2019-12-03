@@ -57,37 +57,6 @@
                 ]
             }
         },
-        "/admin/getSlideShowPageNumber": {
-            "get": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Get slide show page number",
-                "description": "Get slide show page number",
-                "responses": {
-                    "200": {
-                        "description": "Successful"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
         "/admin/addSlideShow": {
             "post": {
                 "tags": [
@@ -227,6 +196,52 @@
                     },
                     "404": {
                         "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/admin/getUserAdmin": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get user",
+                "description": "Get user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Get user",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     },
                     "422": {
                         "description": "Unprocessable Entity"
@@ -490,37 +505,6 @@
                 ]
             }
         },
-        "/admin/statistic": {
-            "get": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Get Statistic",
-                "description": "Get Statistic",
-                "responses": {
-                    "200": {
-                        "description": "Successful"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
         "/admin/getNotificationsAdmin": {
             "post": {
                 "tags": [
@@ -546,37 +530,6 @@
                 "responses": {
                     "200": {
                         "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
-        "/admin/getNotificationsPageNumber": {
-            "get": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Get notifications page number",
-                "description": "Get notifications page number",
-                "responses": {
-                    "200": {
-                        "description": "Successful"
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -810,6 +763,52 @@
                 ]
             }
         },
+        "/admin/getProductAdmin": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get product",
+                "description": "Get product",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Get product",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/admin/addProduct": {
             "post": {
                 "tags": [
@@ -967,83 +966,6 @@
                     },
                     "404": {
                         "description": "Not Found"
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
-        "/admin/getProductAdmin": {
-            "post": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Get product",
-                "description": "Get product",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Get product",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "page": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
-        "/admin/getProductPageNumber": {
-            "get": {
-                "tags": [
-                    "Admin"
-                ],
-                "summary": "Get product page number",
-                "description": "Get product page number",
-                "responses": {
-                    "200": {
-                        "description": "Successful"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
                     },
                     "422": {
                         "description": "Unprocessable Entity"
