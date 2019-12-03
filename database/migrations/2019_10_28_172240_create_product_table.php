@@ -20,7 +20,7 @@ class CreateProductTable extends Migration
             $table->string('product_image', 500);
             $table->string('description', 1500);
             $table->integer('category_id')->unsigned()->index();
-            $table->float('rating', 8, 2)->nullable();
+            $table->float('rating', 8, 2)->default(0);
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('product_category');
         });
