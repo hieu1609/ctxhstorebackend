@@ -59,8 +59,8 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::middleware(['jwt', 'admin'])->group(function () {
         //User
+        Route::post('getUserAdmin', 'AdminController@getUserAdmin');
         Route::get('all-user', 'AdminController@getAllUser');
-        Route::get('statistic', 'AdminController@getStatistic');
         Route::post('addUser', 'AdminController@addUser');
         Route::put('/{id}', 'AdminController@editUser');
         Route::delete('/{id}', 'AdminController@deleteUser');
@@ -71,18 +71,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('sendNotificationForAllUsers', 'AdminController@sendNotificationForAllUsers');
         Route::put('notification/{notificationId}', 'AdminController@editNotification');
         Route::delete('notification/{notificationId}', 'AdminController@deleteNotification');
-        Route::get('getNotificationsPageNumber', 'AdminController@getNotificationsPageNumber');
 
         //Product
+        Route::post('getProductAdmin', 'AdminController@getProductAdmin');
         Route::post('addProduct', 'AdminController@addProduct');
         Route::put('product/{productId}', 'AdminController@editProduct');
         Route::delete('product/{productId}', 'AdminController@deleteProduct');
-        Route::post('getProductAdmin', 'AdminController@getProductAdmin');
-        Route::get('getProductPageNumber', 'AdminController@getProductPageNumber');
 
         //Slide show
         Route::post('getSlideShowAdmin', 'AdminController@getSlideShowAdmin');
-        Route::get('getSlideShowPageNumber', 'AdminController@getSlideShowPageNumber');
         Route::post('addSlideShow', 'AdminController@addSlideShow');
         Route::put('slideshow/{slideShowId}', 'AdminController@editSlideShow');
         Route::delete('slideshow/{slideShowId}', 'AdminController@deleteSlideShow');

@@ -109,7 +109,19 @@ class User extends BaseModel  implements JWTSubject, Authenticatable
             'phone' => 'required|string|regex:/^[0-9\-\+]{9,15}$/',
             'address' => 'required|string',
         ],
+        'Get_User_Admin' => [
+            'page' => 'required|integer'
+        ],
     );
+
+    public static function getUserAdmin($page) {
+        $limit = 10;
+        $space = ($page - 1) * $limit;
+        return User::orderBy('id', 'asc')
+        ->limit($limit)
+        ->offset($space)
+        ->get();
+    }
 
     public static function funcGetAllUser($input)
     {
