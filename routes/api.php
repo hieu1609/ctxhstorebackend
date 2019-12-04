@@ -78,6 +78,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('product/{productId}', 'AdminController@editProduct');
         Route::delete('product/{productId}', 'AdminController@deleteProduct');
 
+        //Order
+        Route::post('getPurchasesReceivedAdmin', 'AdminController@getPurchasesReceivedAdmin');
+        Route::post('getPurchasesConfirmAdmin', 'AdminController@getPurchasesConfirmAdmin');
+        Route::post('getPurchasesShippingAdmin', 'AdminController@getPurchasesShippingAdmin');
+        Route::post('getPurchasesCompletedAdmin', 'AdminController@getPurchasesCompletedAdmin');
+        Route::put('/order/editPurchasesAdmin', 'AdminController@editPurchasesAdmin');
+        Route::delete('/order/deletePurchasesAdmin', 'AdminController@deletePurchasesAdmin');
+
         //Slide show
         Route::post('getSlideShowAdmin', 'AdminController@getSlideShowAdmin');
         Route::post('addSlideShow', 'AdminController@addSlideShow');
