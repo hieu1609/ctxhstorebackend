@@ -48,6 +48,17 @@ class Notification extends BaseModel
         $limit = 10;
         $space = ($page - 1) * $limit;
         return Notification::orderBy('id', 'desc')
+        ->where('user_id_send', 1)
+        ->limit($limit)
+        ->offset($space)
+        ->get();
+    }
+
+    public static function getFeedbackAdmin($page) {
+        $limit = 10;
+        $space = ($page - 1) * $limit;
+        return Notification::orderBy('seen', 'asc')
+        ->where('user_id_receive', 1)
         ->limit($limit)
         ->offset($space)
         ->get();
@@ -56,6 +67,7 @@ class Notification extends BaseModel
     public static function getNotifications($idUser) {
         return Notification::where('user_id_receive', $idUser)
         ->orderBy('id', 'desc')
+        ->limit(5)
         ->get();
     }
 }

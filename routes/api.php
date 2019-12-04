@@ -44,14 +44,24 @@ Route::group(['prefix' => 'data'], function () {
 //Route User
 Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => ['jwt']], function () {
+        //Profile
         Route::put('editUserProfile', 'UserController@editUserProfile');
+
+        //Review
         Route::post('postReview', 'UserController@postReview');
+
+        //Purchases
         Route::get('getAllPurchases', 'UserController@getAllPurchases');
         Route::get('getPurchasesReceived', 'UserController@getPurchasesReceived');
         Route::get('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
         Route::get('getPurchasesShipping', 'UserController@getPurchasesShipping');
         Route::get('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
         Route::delete('CancelOrder', 'UserController@CancelOrder');
+
+        //Notification
+        Route::get('getNotifications', 'UserController@getNotifications');
+        Route::post('postFeedback', 'UserController@postFeedback');
+        Route::put('seenNotification', 'UserController@seenNotification');
     });
 });
 
@@ -66,6 +76,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/{id}', 'AdminController@deleteUser');
 
         //Notification
+        Route::post('getFeedbackAdmin', 'AdminController@getFeedbackAdmin');
         Route::post('getNotificationsAdmin', 'AdminController@getNotificationsAdmin');
         Route::post('sendNotification', 'AdminController@sendNotification');
         Route::post('sendNotificationForAllUsers', 'AdminController@sendNotificationForAllUsers');

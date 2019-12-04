@@ -210,6 +210,7 @@ $ApiErrorMessages = array(
     'id_integer' => 'The id must be integer.',
     'productNumber_min' => 'The product number min is 1.',
     'productNumber_max' => 'The product number max is 10.',
+    'notification_id_not_found' => 'Notification id not found',
 );
 
 $ApiErrorCodes = array(
@@ -419,6 +420,7 @@ $ApiErrorCodes = array(
     'could_not_delete_product' => 8041,
     'detail_id_not_found' => 8040,
     'user_id_not_found' => 8041,
+    'notification_id_not_found' => 8042,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;
