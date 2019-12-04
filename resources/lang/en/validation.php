@@ -340,6 +340,8 @@ return [
         'productNumber' => [
             'required' => 'productNumber_required',
             'integer' => 'productNumber_integer',
+            'min' => 'productNumber_min',
+            'max' => 'productNumber_max',
         ],
         'rating' => [
             'required' => 'rating_required',
@@ -368,6 +370,22 @@ return [
         'slideShowId' => [
             'required' => 'slideShowId_required',
             'integer' => 'slideShowId_integer',
+        ],
+        'confirm' => [
+            'required' => 'confirm_required',
+            'boolean' => 'confirm_boolean',
+        ],
+        'shipping' => [
+            'required' => 'shipping_required',
+            'boolean' => 'shipping_boolean',
+        ],
+        'success' => [
+            'required' => 'success_required',
+            'boolean' => 'success_boolean',
+        ],
+        'id' => [
+            'required' => 'id_required',
+            'integer' => 'id_integer',
         ],
     ],
 

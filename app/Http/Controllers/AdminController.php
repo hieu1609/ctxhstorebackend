@@ -7,6 +7,8 @@ use App\Product;
 use App\ProductCategory;
 use App\Notification;
 use App\SlideShow;
+use App\OrderDetail;
+use App\OrderTable;
 use Illuminate\Http\Request;
 
 class AdminController extends BaseApiController
@@ -545,6 +547,50 @@ class AdminController extends BaseApiController
         }
     }
 
+    public function getFeedbackAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getFeedbackAdmin",
+         *     description="Get feedback",
+         *     tags={"Admin"},
+         *     summary="Get feedback",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get feedback",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = Notification::validate($request->all(), 'Get_Notifications_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $total = Notification::where(['user_id_receive' => 1])->count();
+            $result['data'] = Notification::getFeedbackAdmin($request->page);
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
+        }
+    }
+
     public function getNotificationsAdmin(Request $request)
     {
         /**
@@ -579,9 +625,10 @@ class AdminController extends BaseApiController
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
+            $total = Notification::where(['user_id_send' => 1])->count();
             $result['data'] = Notification::getNotificationsAdmin($request->page);
-            $result['numPage'] = ceil(Notification::count()/10);
-            $result['total'] = Notification::count();
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
@@ -1070,9 +1117,373 @@ class AdminController extends BaseApiController
             if (!$checkProductId) {
                 return $this->responseErrorCustom("product_id_not_found", 404);
             }
-
+            $checkOrderProduct = OrderDetail::where(['product_id' => $request->productId])->first();
+            if ($checkOrderProduct) {
+                return $this->responseErrorCustom("could_not_delete_product", 404);
+            }
             $checkProductId->delete();
             return $this->responseSuccess("Delete product successfully");
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getPurchasesReceivedAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getPurchasesReceivedAdmin",
+         *     description="Get purchases received admin",
+         *     tags={"Admin"},
+         *     summary="Get purchases received admin",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get purchases received admin",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $total = OrderDetail::where(['confirm' => 0, 'shipping' => 0, 'success' => 0])->count();
+            $result['data'] = OrderDetail::getPurchasesReceivedAdmin($request->page);
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getPurchasesConfirmAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getPurchasesConfirmAdmin",
+         *     description="Get purchases confirm admin",
+         *     tags={"Admin"},
+         *     summary="Get purchases confirm admin",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get purchases confirm admin",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $total = OrderDetail::where(['confirm' => 1, 'shipping' => 0, 'success' => 0])->count();
+            $result['data'] = OrderDetail::getPurchasesConfirmAdmin($request->page);
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getPurchasesShippingAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getPurchasesShippingAdmin",
+         *     description="Get purchases shipping admin",
+         *     tags={"Admin"},
+         *     summary="Get purchases shipping admin",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get purchases shipping admin",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $total = OrderDetail::where(['confirm' => 1, 'shipping' => 1, 'success' => 0])->count();
+            $result['data'] = OrderDetail::getPurchasesShippingAdmin($request->page);
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getPurchasesCompletedAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getPurchasesCompletedAdmin",
+         *     description="Get purchases completed admin",
+         *     tags={"Admin"},
+         *     summary="Get purchases completed admin",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get purchases completed admin",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $total = OrderDetail::where(['confirm' => 1, 'shipping' => 1, 'success' => 1])->count();
+            $result['data'] = OrderDetail::getPurchasesCompletedAdmin($request->page);
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function editPurchasesAdmin(Request $request)
+    {
+        /**
+         * @SWG\Put(
+         *     path="/admin/order/editPurchasesAdmin",
+         *     description="Edit purchases admin",
+         *     tags={"Admin"},
+         *     summary="Edit purchases admin",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Edit purchases admin",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="id",
+         *                  type="integer",
+         *              ),
+         *              @SWG\property(
+         *                  property="orderId",
+         *                  type="integer",
+         *              ),
+         *              @SWG\property(
+         *                  property="productId",
+         *                  type="integer",
+         *              ),
+         *              @SWG\property(
+         *                  property="productNumber",
+         *                  type="integer",
+         *              ),
+         *              @SWG\property(
+         *                  property="confirm",
+         *                  type="boolean",
+         *              ),
+         *              @SWG\property(
+         *                  property="shipping",
+         *                  type="boolean",
+         *              ),
+         *              @SWG\property(
+         *                  property="success",
+         *                  type="boolean",
+         *              ),
+         *              @SWG\property(
+         *                  property="name",
+         *                  type="string",
+         *              ),
+         *              @SWG\property(
+         *                  property="phone",
+         *                  type="string",
+         *              ),
+         *              @SWG\property(
+         *                  property="address",
+         *                  type="string",
+         *              ),
+         *              @SWG\property(
+         *                  property="email",
+         *                  type="string",
+         *              ),
+         *              @SWG\property(
+         *                  property="userId",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = OrderDetail::validate($request->all(), 'Edit_Purchases_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $checkOrderDetail = OrderDetail::where(['id' => $request->id])->first();
+            if (!$checkOrderDetail) {
+                return $this->responseErrorCustom("detail_id_not_found", 404);
+            }
+            $checkOrderTable = OrderTable::where(['id' => $request->orderId])->first();
+            if (!$checkOrderTable) {
+                return $this->responseErrorCustom("order_id_not_found", 404);
+            }
+            $checkProduct = Product::where(['id' => $request->productId])->first();
+            if (!$checkProduct) {
+                return $this->responseErrorCustom("product_id_not_found", 404);
+            }
+            $checkuserId = User::where(['id' => $request->userId])->first();
+            if (!$checkuserId) {
+                $name = $request->name;
+                $phone = $request->phone;
+                $address = $request->address;
+                $email = $request->email;
+            }
+            else {
+                $name = $checkuserId->name;
+                $phone = $checkuserId->phone;
+                $address = $checkuserId->address;
+                $email = $checkuserId->email;
+            }
+
+            //save order detail
+            $checkOrderDetail->order_id = $request->orderId;
+            $checkOrderDetail->product_id = $request->productId;
+            $checkOrderDetail->product_name = $checkProduct->product_name;
+            $checkOrderDetail->product_price = $checkProduct->price * $request->productNumber;
+            $checkOrderDetail->product_number = $request->productNumber;
+            $checkOrderDetail->confirm = $request->confirm;
+            $checkOrderDetail->shipping = $request->shipping;
+            $checkOrderDetail->success = $request->success;
+            $checkOrderDetail->save();
+
+            //save order table
+            $checkOrderTable->name = $name;
+            $checkOrderTable->phone = $phone;
+            $checkOrderTable->address = $address;
+            $checkOrderTable->email = $email;
+            $checkOrderTable->save();
+
+            return $this->responseSuccess("Edit order successfully");
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function deletePurchasesAdmin(Request $request)
+    {
+        /**
+         * @SWG\Delete(
+         *     path="/admin/order/deletePurchasesAdmin",
+         *     description="Delete purchases admin",
+         *     tags={"Admin"},
+         *     summary="Delete purchases admin",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Delete purchases admin",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="id",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=404, description="Not Found"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = OrderDetail::validate($request->all(), 'Delete_Purchases_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $checkOrderDetail = OrderDetail::where(['id' => $request->id])->first();
+            if (!$checkOrderDetail) {
+                return $this->responseErrorCustom("detail_id_not_found", 404);
+            }
+            $orderId = $checkOrderDetail->order_id;
+            $checkOrderDetail->delete();
+            $checkOrderDetailAfter = OrderDetail::where(['order_id' => $orderId])->first();
+            if (!$checkOrderDetailAfter) {
+                $checkOrderTable = OrderTable::where(['id' => $orderId])->first();
+                if (!$checkOrderTable) {
+                    return $this->responseErrorCustom("order_id_not_found", 404);
+                }
+                else {
+                    $checkOrderTable->delete();
+                }
+            }
+            return $this->responseSuccess("Delete slide show successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
         }
