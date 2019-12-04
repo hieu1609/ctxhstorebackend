@@ -547,6 +547,50 @@ class AdminController extends BaseApiController
         }
     }
 
+    public function getFeedbackAdmin(Request $request)
+    {
+        /**
+         * @SWG\Post(
+         *     path="/admin/getFeedbackAdmin",
+         *     description="Get feedback",
+         *     tags={"Admin"},
+         *     summary="Get feedback",
+         *     security={{"jwt":{}}},
+         *      @SWG\Parameter(
+         *          name="body",
+         *          description="Get feedback",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $validator = Notification::validate($request->all(), 'Get_Notifications_Admin');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $total = Notification::where(['user_id_receive' => 1])->count();
+            $result['data'] = Notification::getFeedbackAdmin($request->page);
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
+        }
+    }
+
     public function getNotificationsAdmin(Request $request)
     {
         /**
@@ -581,9 +625,10 @@ class AdminController extends BaseApiController
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
+            $total = Notification::where(['user_id_send' => 1])->count();
             $result['data'] = Notification::getNotificationsAdmin($request->page);
-            $result['numPage'] = ceil(Notification::count()/10);
-            $result['total'] = Notification::count();
+            $result['numPage'] = ceil($total/10);
+            $result['total'] = $total;
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
