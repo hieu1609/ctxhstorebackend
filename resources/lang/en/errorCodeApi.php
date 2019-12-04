@@ -196,6 +196,20 @@ $ApiErrorMessages = array(
     'slideShowId_required' => 'The slide show id is required.',
     'slideShowId_integer' => 'The slide show id must be integer.',
     'slide_show_id_not_found' => 'The slide show id not found.',
+    'could_not_delete_product' => 'Could not delete the product. Already in order detail table.',
+    'detail_id_not_found' => 'The detail id not found.',
+    'user_id_not_found' => 'The user id not found.',
+
+    'confirm_required' => 'The confirm is required.',
+    'confirm_boolean' => 'The confirm must be true or false.',
+    'shipping_required' => 'The shipping is required.',
+    'shipping_boolean' => 'The shipping must be true or false.',
+    'success_required' => 'The success is required.',
+    'success_boolean' => 'The success must be true or false.',
+    'id_required' => 'The id is required.',
+    'id_integer' => 'The id must be integer.',
+    'productNumber_min' => 'The product number min is 1.',
+    'productNumber_max' => 'The product number max is 10.',
 );
 
 $ApiErrorCodes = array(
@@ -354,6 +368,17 @@ $ApiErrorCodes = array(
     'slideShowId_required' => 3392,
     'slideShowId_integer' => 3393,
 
+    'confirm_required' => 3394,
+    'confirm_boolean' => 3395,
+    'shipping_required' => 3396,
+    'shipping_boolean' => 3397,
+    'success_required' => 3398,
+    'success_boolean' => 3399,
+    'id_required' => 3400,
+    'id_integer' => 3401,
+    'productNumber_min' => 3402,
+    'productNumber_max' => 3403,
+
     //custom error
     'email_password_invalid' => 8000,
     'user_password_invalid' => 8001,
@@ -391,6 +416,9 @@ $ApiErrorCodes = array(
     'order_id_not_found' => 8038,
     'cannot_cancel_order' => 8039,
     'slide_show_id_not_found' => 8040,
+    'could_not_delete_product' => 8041,
+    'detail_id_not_found' => 8040,
+    'user_id_not_found' => 8041,
 );
 
 $ApiCodes['ApiErrorMessages'] = $ApiErrorMessages;
