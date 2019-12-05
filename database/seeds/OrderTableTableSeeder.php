@@ -41,13 +41,32 @@ class OrderTableTableSeeder extends Seeder
                 "updated_at"=> "2019-08-29 03:12:35"
             ],
             [
-                'name' => 'Nguyễn Văn B',
-                'phone' => '09886531221',
-                'address' => 'Bình Thuận',
-                'email' => 'nguyenvanb@gmail.com',
+                'name' => 'String',
+                'phone' => '0953232326',
+                'address' => 'Hà Đông, Hà Nội',
+                'email' => 'string@gmail.com',
+                'user' => 6,
                 "created_at"=> "2019-08-29 03:12:36",
                 "updated_at"=> "2019-08-29 03:12:36"
-            ]
+            ],
+            [
+                'name' => 'Linh',
+                'phone' => '0363425679',
+                'address' => 'Long Thành, Đồng Nai',
+                'email' => 'linh@gmail.com',
+                'user' => 4,
+                "created_at"=> "2019-08-29 03:12:37",
+                "updated_at"=> "2019-08-29 03:12:37"
+            ],
+            [
+                'name' => 'Vy',
+                'phone' => '0353659895',
+                'address' => 'Lý Hòa, Bình Trị Thiên, Quảng Bình',
+                'email' => 'levy@gmail.com',
+                'user' => 5,
+                "created_at"=> "2019-08-29 03:12:38",
+                "updated_at"=> "2019-08-29 03:12:38"
+            ],
         ];
         
         foreach ($orderTables as $key => $orderTable) {
