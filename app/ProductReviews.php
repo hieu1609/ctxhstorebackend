@@ -16,6 +16,10 @@ class ProductReviews extends BaseModel
             'productId' => 'required|integer',
             'rating' => 'required|integer',
         ],
+        'Get_Comment_By_ProductId' => [
+            'productId' => 'required|integer',
+            'page' => 'required|integer',
+        ],
     );
 
     public static function getAVGRatingProduct($productId) {
@@ -23,8 +27,12 @@ class ProductReviews extends BaseModel
         ->avg('rating');
     }
 
-    public static function getCommentByProductId($productId) {
+    public static function getCommentByProductId($productId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return ProductReviews::where('product_id', $productId)
+        ->limit($limit)
+        ->offset($space)
         ->get();
     }
 }
