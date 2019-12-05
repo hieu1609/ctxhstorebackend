@@ -931,6 +931,32 @@ class AdminController extends BaseApiController
         }
     }
 
+    public function getAllProductAdmin(Request $request)
+    {
+        /**
+         * @SWG\Get(
+         *     path="/admin/getAllProductAdmin",
+         *     description="Get all product",
+         *     tags={"Admin"},
+         *     summary="Get all product",
+         *     security={{"jwt":{}}},
+         * 
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $result = Product::get();
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
     public function addProduct(Request $request)
     {
         /**
@@ -1486,6 +1512,28 @@ class AdminController extends BaseApiController
             return $this->responseSuccess("Delete slide show successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getProductDataChart(Request $request)
+    {
+        /**
+         * @SWG\Get(
+         *     path="/data/getProductDataChart",
+         *     description="get product data chart",
+         *     tags={"Data"},
+         *     summary="get product data chart",
+         *
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+        try {
+            $dataProductCategory = ProductCategory::getProductCategory();
+            return $this->responseSuccess($dataProductCategory);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }
     }
 }
