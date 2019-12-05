@@ -55,7 +55,7 @@ class UsersTableSeeder extends Seeder
                 "updated_at"=> "2019-08-28 03:12:35"
             ],
             [
-                "email" => "vy@gmail.com",
+                "email" => "levy@gmail.com",
                 'password' => bcrypt('string'),
                 "name" => "Vy",
                 'phone' => '0353659895',

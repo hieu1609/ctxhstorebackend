@@ -159,4 +159,17 @@ class OrderDetail extends BaseModel
         'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
         'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
+
+    public static function getTotalProductsById($productId) {
+        return OrderDetail::where('product_id', $productId)
+        ->where('success', 1)
+        ->sum('product_number');
+    }
+
+    public static function getTotalMoneyById($user) {
+        return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
+        ->where('order_table.user', $user)
+        ->where('order_detail.success', 1)
+        ->sum('order_detail.product_price');
+    }
 }
