@@ -1562,9 +1562,13 @@ class AdminController extends BaseApiController
             if (!$checkOrderDetail) {
                 return $this->responseErrorCustom("detail_id_not_found", 404);
             }
+            
+            //delete order detail by id
+            $oldProductId = $checkOrderDetail->product_id;
+            $orderId = $checkOrderDetail->order_id;
+            $checkOrderDetail->delete();
 
             //save top products
-            $oldProductId = $checkOrderDetail->product_id;
             $totalProduct = OrderDetail::getTotalProductsById($oldProductId);
             $topProducts = TopProducts::updateOrCreate(
                 [
@@ -1575,10 +1579,6 @@ class AdminController extends BaseApiController
                     'total_products' => $totalProduct,
                 ]
             );
-            $orderId = $checkOrderDetail->order_id;
-
-            //delete order detail by id
-            $checkOrderDetail->delete();
 
             $checkOrderTable = OrderTable::where(['id' => $orderId])->first();
             $user = $checkOrderTable->user;
