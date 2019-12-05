@@ -46,7 +46,10 @@ class OrderDetail extends BaseModel
     public static function getAllPurchases($userId) {
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
-        ->get();
+        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
+        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
+        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
+        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesReceived($userId) {
