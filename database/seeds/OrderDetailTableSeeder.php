@@ -19,8 +19,8 @@ class OrderDetailTableSeeder extends Seeder
                 'product_name' => 'Chì khắc',
                 'product_price' => 30000,
                 'product_number' => 2,
-                "created_at"=> "2019-08-29 03:12:37",
-                "updated_at"=> "2019-08-29 03:12:37"
+                "created_at" => "2019-08-29 03:12:37",
+                "updated_at" => "2019-08-29 03:12:37"
             ],
             [
                 'order_id' => 2,
@@ -29,8 +29,8 @@ class OrderDetailTableSeeder extends Seeder
                 'product_price' => 160000,
                 'product_number' => 2,
                 'confirm' => 1,
-                "created_at"=> "2019-08-29 03:12:38",
-                "updated_at"=> "2019-08-29 03:12:38"
+                "created_at" => "2019-08-29 03:12:38",
+                "updated_at" => "2019-08-29 03:12:38"
 
             ],
             [
@@ -40,8 +40,8 @@ class OrderDetailTableSeeder extends Seeder
                 'product_price' => 24000,
                 'product_number' => 3,
                 'confirm' => 1,
-                "created_at"=> "2019-08-29 03:12:38",
-                "updated_at"=> "2019-08-29 03:12:38"
+                "created_at" => "2019-08-29 03:12:38",
+                "updated_at" => "2019-08-29 03:12:38"
 
             ],
             [
@@ -53,20 +53,20 @@ class OrderDetailTableSeeder extends Seeder
                 'confirm' => 1,
                 'shipping' => 1,
                 'success' => 1,
-                "created_at"=> "2019-08-29 03:12:39",
-                "updated_at"=> "2019-08-29 03:12:39"
+                "created_at" => "2019-08-29 03:12:39",
+                "updated_at" => "2019-08-29 03:12:39"
             ],
             [
                 'order_id' => 4,
                 'product_id' => 10,
                 'product_name' => 'Vòng tay paracord kiểu 1 màu trắng đục',
                 'product_price' => 175000,
-                'product_number' => 5,
+                'product_number' => 9,
                 'confirm' => 1,
                 'shipping' => 1,
                 'success' => 1,
-                "created_at"=> "2019-08-29 03:12:40",
-                "updated_at"=> "2019-08-29 03:12:40"
+                "created_at" => "2019-08-29 03:12:40",
+                "updated_at" => "2019-08-29 03:12:40"
             ],
             [
                 'order_id' => 4,
@@ -77,8 +77,8 @@ class OrderDetailTableSeeder extends Seeder
                 'confirm' => 1,
                 'shipping' => 1,
                 'success' => 1,
-                "created_at"=> "2019-08-29 03:12:41",
-                "updated_at"=> "2019-08-29 03:12:41"
+                "created_at" => "2019-08-29 03:12:41",
+                "updated_at" => "2019-08-29 03:12:41"
             ],
             [
                 'order_id' => 5,
@@ -89,8 +89,8 @@ class OrderDetailTableSeeder extends Seeder
                 'confirm' => 1,
                 'shipping' => 1,
                 'success' => 1,
-                "created_at"=> "2019-08-29 03:12:42",
-                "updated_at"=> "2019-08-29 03:12:42"
+                "created_at" => "2019-08-29 03:12:42",
+                "updated_at" => "2019-08-29 03:12:42"
             ],
             [
                 'order_id' => 6,
@@ -101,11 +101,11 @@ class OrderDetailTableSeeder extends Seeder
                 'confirm' => 1,
                 'shipping' => 1,
                 'success' => 0,
-                "created_at"=> "2019-08-29 03:12:42",
-                "updated_at"=> "2019-08-29 03:12:42"
+                "created_at" => "2019-08-29 03:12:42",
+                "updated_at" => "2019-08-29 03:12:42"
             ],
         ];
-        
+
         foreach ($orderDetails as $key => $orderDetail) {
             OrderDetail::create($orderDetail);
         }
