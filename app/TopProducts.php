@@ -16,8 +16,9 @@ class TopProducts extends BaseModel
     );
 
     public static function getProductDataChart() {
-        return TopProducts::orderBy('total_products', 'desc')
+        return TopProducts::join('product', 'top_products.product_id', '=', 'product.id')
+        ->orderBy('top_products.total_products', 'desc')
         ->limit(3)
-        ->get();
+        ->get(['top_products.*', 'product.product_name', 'product.price', 'product.product_image', 'product.category_id', 'product.rating']);
     }
 }

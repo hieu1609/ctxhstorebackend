@@ -61,7 +61,7 @@ class OrderDetailTableSeeder extends Seeder
                 'product_id' => 10,
                 'product_name' => 'Vòng tay paracord kiểu 1 màu trắng đục',
                 'product_price' => 175000,
-                'product_number' => 5,
+                'product_number' => 9,
                 'confirm' => 1,
                 'shipping' => 1,
                 'success' => 1,

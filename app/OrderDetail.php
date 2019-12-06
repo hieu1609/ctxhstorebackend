@@ -46,10 +46,7 @@ class OrderDetail extends BaseModel
     public static function getAllPurchases($userId) {
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesReceived($userId) {
@@ -58,10 +55,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.confirm', 0)
         ->where('order_detail.shipping', 0)
         ->where('order_detail.success', 0)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesConfirm($userId) {
@@ -70,10 +64,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.confirm', 1)
         ->where('order_detail.shipping', 0)
         ->where('order_detail.success', 0)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesShipping($userId) {
@@ -82,10 +73,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.confirm', 1)
         ->where('order_detail.shipping', 1)
         ->where('order_detail.success', 0)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesCompleted($userId) {
@@ -94,10 +82,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.confirm', 1)
         ->where('order_detail.shipping', 1)
         ->where('order_detail.success', 1)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesReceivedAdmin($page) {
@@ -109,10 +94,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.success', 0)
         ->limit($limit)
         ->offset($space)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesConfirmAdmin($page) {
@@ -124,10 +106,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.success', 0)
         ->limit($limit)
         ->offset($space)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesShippingAdmin($page) {
@@ -139,10 +118,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.success', 0)
         ->limit($limit)
         ->offset($space)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getPurchasesCompletedAdmin($page) {
@@ -154,10 +130,7 @@ class OrderDetail extends BaseModel
         ->where('order_detail.success', 1)
         ->limit($limit)
         ->offset($space)
-        ->get(['order_detail.id', 'order_detail.order_id', 'order_detail.product_id', 'order_detail.product_name',
-        'order_detail.product_price', 'order_detail.product_number', 'order_detail.confirm', 'order_detail.shipping',
-        'order_detail.success', 'order_detail.created_at', 'order_detail.updated_at',
-        'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
+        ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
     public static function getTotalProductsById($productId) {

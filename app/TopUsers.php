@@ -16,8 +16,9 @@ class TopUsers extends BaseModel
     );
 
     public static function getUserDataChart() {
-        return TopUsers::orderBy('total_money', 'desc')
+        return TopUsers::join('users', 'top_users.user_id', '=', 'users.id')
+        ->orderBy('top_users.total_money', 'desc')
         ->limit(3)
-        ->get();
+        ->get(['top_users.*', 'users.name', 'users.email', 'users.phone', 'users.address', 'users.admin']);
     }
 }
