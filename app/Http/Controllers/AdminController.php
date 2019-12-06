@@ -1147,7 +1147,7 @@ class AdminController extends BaseApiController
             }
             $checkOrderProduct = OrderDetail::where(['product_id' => $request->productId])->first();
             if ($checkOrderProduct) {
-                return $this->responseErrorCustom("could_not_delete_product", 404);
+                return $this->responseErrorCustom("could_not_delete_product", 403);
             }
             $checkProductId->delete();
             return $this->responseSuccess("Delete product successfully");
