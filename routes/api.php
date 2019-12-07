@@ -56,10 +56,10 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
         Route::get('getPurchasesShipping', 'UserController@getPurchasesShipping');
         Route::get('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
-        Route::delete('CancelOrder', 'UserController@CancelOrder');
+        Route::delete('cancelorder/{orderId}', 'UserController@CancelOrder');
 
         //Notification
-        Route::get('getNotifications', 'UserController@getNotifications');
+        Route::post('getNotifications', 'UserController@getNotifications');
         Route::post('postFeedback', 'UserController@postFeedback');
         Route::put('seenNotification', 'UserController@seenNotification');
     });
