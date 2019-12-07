@@ -267,25 +267,21 @@ class UserController extends BaseApiController
         }
     }
 
-     /**
+    /**
      * @SWG\Delete(
-     *     path="/user/CancelOrder",
+     *     path="/user/cancelorder/{orderId}",
      *     description="Cancel order",
      *     tags={"User"},
      *     summary="Cancel order",
      *     security={{"jwt":{}}},
      *      @SWG\Parameter(
-     *          name="body",
-     *          description="Cancel order",
-     *          required=true,
-     *          in="body",
-     *          @SWG\Schema(
-     *              @SWG\property(
-     *                  property="orderId",
-     *                  type="integer",
-     *              ),
-     *          ),
-     *      ),
+     *         description="ID order to delete",
+     *         in="path",
+     *         name="orderId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
      *      @SWG\Response(response=200, description="Successful operation"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -297,7 +293,8 @@ class UserController extends BaseApiController
     public function CancelOrder(Request $request)
     {
         try {
-            $validator = OrderDetail::validate($request->all(), 'Cancel_Order');
+            $input['orderId'] = $request->orderId;
+            $validator = OrderDetail::validate($input, 'Cancel_Order');
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
