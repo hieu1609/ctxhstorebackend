@@ -59,7 +59,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::delete('CancelOrder', 'UserController@CancelOrder');
 
         //Notification
-        Route::get('getNotifications', 'UserController@getNotifications');
+        Route::post('getNotifications', 'UserController@getNotifications');
         Route::post('postFeedback', 'UserController@postFeedback');
         Route::put('seenNotification', 'UserController@seenNotification');
     });

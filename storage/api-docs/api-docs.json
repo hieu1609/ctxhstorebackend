@@ -2249,12 +2249,27 @@
             }
         },
         "/user/getNotifications": {
-            "get": {
+            "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "get notifications",
-                "description": "get notifications",
+                "summary": "Get notifications",
+                "description": "Get notifications",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Get notifications",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

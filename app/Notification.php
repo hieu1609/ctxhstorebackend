@@ -42,6 +42,9 @@ class Notification extends BaseModel
         'Get_Notifications_Admin' => [
             'page' => 'required|integer'
         ],
+        'Get_Notifications' => [
+            'page' => 'required|integer'
+        ],
     );
 
     public static function getNotificationsAdmin($page) {
@@ -66,10 +69,13 @@ class Notification extends BaseModel
         ->get(['notification.*', 'users.name', 'users.admin']);
     }
 
-    public static function getNotifications($idUser) {
+    public static function getNotifications($idUser, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return Notification::where('user_id_receive', $idUser)
         ->orderBy('id', 'desc')
-        ->limit(5)
+        ->limit($limit)
+        ->offset($space)
         ->get();
     }
 }
