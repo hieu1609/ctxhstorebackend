@@ -2079,27 +2079,12 @@
             }
         },
         "/user/getAllPurchases": {
-            "post": {
+            "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get all purchases",
                 "description": "Get all purchases",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Get all purchases",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "page": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful"
@@ -2125,27 +2110,12 @@
             }
         },
         "/user/getPurchasesReceived": {
-            "post": {
+            "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get purchases received",
                 "description": "Get purchases received",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Get purchases received",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "page": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful"
@@ -2171,27 +2141,12 @@
             }
         },
         "/user/getPurchasesConfirm": {
-            "post": {
+            "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get purchases confirm",
                 "description": "Get purchases confirm",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Get purchases confirm",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "page": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful"
@@ -2217,27 +2172,12 @@
             }
         },
         "/user/getPurchasesShipping": {
-            "post": {
+            "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get purchases shipping",
                 "description": "Get purchases shipping",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Get purchases shipping",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "page": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful"
@@ -2263,27 +2203,12 @@
             }
         },
         "/user/getPurchasesCompleted": {
-            "post": {
+            "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get purchases completed",
                 "description": "Get purchases completed",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Get purchases completed",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "page": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Successful"
