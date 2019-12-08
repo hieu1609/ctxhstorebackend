@@ -40,7 +40,6 @@ class DataController extends BaseApiController
      *     description="Get product by category id",
      *     tags={"Data"},
      *     summary="Get product by category id",
-     *
      *      @SWG\Parameter(
      *          name="body",
      *          description="Get product by category id",
@@ -276,6 +275,10 @@ class DataController extends BaseApiController
      *                  property="productId",
      *                  type="integer",
      *              ),
+     *              @SWG\property(
+     *                  property="page",
+     *                  type="integer",
+     *              ),
      *          ),
      *      ),
      *      @SWG\Response(response=200, description="Successful operation"),
@@ -288,7 +291,11 @@ class DataController extends BaseApiController
     public function getCommentByProductId(Request $request)
     {
         try {
-            $comment = ProductReviews::getCommentByProductId($request->productId);
+            $validator = ProductReviews::validate($request->all(), 'Get_Comment_By_ProductId');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $comment = ProductReviews::getCommentByProductId($request->productId, $request->page);
             return $this->responseSuccess($comment);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);

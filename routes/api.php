@@ -44,7 +44,68 @@ Route::group(['prefix' => 'data'], function () {
 //Route User
 Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => ['jwt']], function () {
+        //Profile
         Route::put('editUserProfile', 'UserController@editUserProfile');
+
+        //Review
         Route::post('postReview', 'UserController@postReview');
+
+        //Purchases
+        Route::get('getAllPurchases', 'UserController@getAllPurchases');
+        Route::get('getPurchasesReceived', 'UserController@getPurchasesReceived');
+        Route::get('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
+        Route::get('getPurchasesShipping', 'UserController@getPurchasesShipping');
+        Route::get('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
+        Route::delete('CancelOrder', 'UserController@CancelOrder');
+
+        //Notification
+        Route::get('getNotifications', 'UserController@getNotifications');
+        Route::post('postFeedback', 'UserController@postFeedback');
+        Route::put('seenNotification', 'UserController@seenNotification');
+    });
+});
+
+//Route Admin
+Route::group(['prefix' => 'admin'], function () {
+    Route::middleware(['jwt', 'admin'])->group(function () {
+        //User
+        Route::post('getUserAdmin', 'AdminController@getUserAdmin');
+        Route::get('all-user', 'AdminController@getAllUser');
+        Route::post('addUser', 'AdminController@addUser');
+        Route::put('/{id}', 'AdminController@editUser');
+        Route::delete('/{id}', 'AdminController@deleteUser');
+
+        //Notification
+        Route::post('getFeedbackAdmin', 'AdminController@getFeedbackAdmin');
+        Route::post('getNotificationsAdmin', 'AdminController@getNotificationsAdmin');
+        Route::post('sendNotification', 'AdminController@sendNotification');
+        Route::post('sendNotificationForAllUsers', 'AdminController@sendNotificationForAllUsers');
+        Route::put('notification/{notificationId}', 'AdminController@editNotification');
+        Route::delete('notification/{notificationId}', 'AdminController@deleteNotification');
+
+        //Product
+        Route::post('getProductAdmin', 'AdminController@getProductAdmin');
+        Route::get('getAllProductAdmin', 'AdminController@getAllProductAdmin');
+        Route::post('addProduct', 'AdminController@addProduct');
+        Route::put('product/{productId}', 'AdminController@editProduct');
+        Route::delete('product/{productId}', 'AdminController@deleteProduct');
+
+        //Order
+        Route::post('getPurchasesReceivedAdmin', 'AdminController@getPurchasesReceivedAdmin');
+        Route::post('getPurchasesConfirmAdmin', 'AdminController@getPurchasesConfirmAdmin');
+        Route::post('getPurchasesShippingAdmin', 'AdminController@getPurchasesShippingAdmin');
+        Route::post('getPurchasesCompletedAdmin', 'AdminController@getPurchasesCompletedAdmin');
+        Route::put('order/editPurchasesAdmin', 'AdminController@editPurchasesAdmin');
+        Route::delete('order/{id}', 'AdminController@deletePurchasesAdmin');
+
+        //Slide show
+        Route::post('getSlideShowAdmin', 'AdminController@getSlideShowAdmin');
+        Route::post('addSlideShow', 'AdminController@addSlideShow');
+        Route::put('slideshow/{slideShowId}', 'AdminController@editSlideShow');
+        Route::delete('slideshow/{slideShowId}', 'AdminController@deleteSlideShow');
+
+        //Char
+        Route::get('getProductDataChart', 'AdminController@getProductDataChart');
+        Route::get('getUserDataChart', 'AdminController@getUserDataChart');
     });
 });
