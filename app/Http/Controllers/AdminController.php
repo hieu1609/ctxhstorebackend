@@ -9,6 +9,8 @@ use App\Notification;
 use App\SlideShow;
 use App\OrderDetail;
 use App\OrderTable;
+use App\TopUsers;
+use App\TopProducts;
 use Illuminate\Http\Request;
 
 class AdminController extends BaseApiController
@@ -417,14 +419,14 @@ class AdminController extends BaseApiController
          *     tags={"Admin"},
          *     summary="Delete user",
          *     security={{"jwt":{}}},
-         *      @SWG\Parameter(
+         *     @SWG\Parameter(
          *         description="ID user to delete",
          *         in="path",
          *         name="id",
          *         required=true,
          *         type="integer",
          *         format="int64"
-         *     ),
+         *      ),
          *      @SWG\Response(response=200, description="Successful"),
          *      @SWG\Response(response=401, description="Unauthorized"),
          *      @SWG\Response(response=403, description="Forbidden"),
@@ -1145,7 +1147,7 @@ class AdminController extends BaseApiController
             }
             $checkOrderProduct = OrderDetail::where(['product_id' => $request->productId])->first();
             if ($checkOrderProduct) {
-                return $this->responseErrorCustom("could_not_delete_product", 404);
+                return $this->responseErrorCustom("could_not_delete_product", 403);
             }
             $checkProductId->delete();
             return $this->responseSuccess("Delete product successfully");
@@ -1412,14 +1414,27 @@ class AdminController extends BaseApiController
             if (!$checkOrderDetail) {
                 return $this->responseErrorCustom("detail_id_not_found", 404);
             }
+            $oldProductId = $checkOrderDetail->product_id;
             $checkOrderTable = OrderTable::where(['id' => $request->orderId])->first();
             if (!$checkOrderTable) {
                 return $this->responseErrorCustom("order_id_not_found", 404);
             }
+            $oldUser = $checkOrderTable->user;
             $checkProduct = Product::where(['id' => $request->productId])->first();
             if (!$checkProduct) {
                 return $this->responseErrorCustom("product_id_not_found", 404);
             }
+            $confirm = $request->confirm;
+            $shipping = $request->shipping;
+            $success = $request->success;
+            if ($request->success == true){
+                $confirm = true;
+                $shipping = true;
+            }
+            else if ($request->shipping == true && $request->success == false){
+                $confirm = true;
+            }
+            $user = null;
             $checkuserId = User::where(['id' => $request->userId])->first();
             if (!$checkuserId) {
                 $name = $request->name;
@@ -1432,6 +1447,7 @@ class AdminController extends BaseApiController
                 $phone = $checkuserId->phone;
                 $address = $checkuserId->address;
                 $email = $checkuserId->email;
+                $user = $checkuserId->id;
             }
 
             //save order detail
@@ -1440,9 +1456,9 @@ class AdminController extends BaseApiController
             $checkOrderDetail->product_name = $checkProduct->product_name;
             $checkOrderDetail->product_price = $checkProduct->price * $request->productNumber;
             $checkOrderDetail->product_number = $request->productNumber;
-            $checkOrderDetail->confirm = $request->confirm;
-            $checkOrderDetail->shipping = $request->shipping;
-            $checkOrderDetail->success = $request->success;
+            $checkOrderDetail->confirm = $confirm;
+            $checkOrderDetail->shipping = $shipping;
+            $checkOrderDetail->success = $success;
             $checkOrderDetail->save();
 
             //save order table
@@ -1450,7 +1466,59 @@ class AdminController extends BaseApiController
             $checkOrderTable->phone = $phone;
             $checkOrderTable->address = $address;
             $checkOrderTable->email = $email;
+            $checkOrderTable->user = $user;
             $checkOrderTable->save();
+
+            //save top products
+            if ($oldProductId != $request->productId) {
+                $totalProduct = OrderDetail::getTotalProductsById($oldProductId);
+                $topProducts = TopProducts::updateOrCreate(
+                    [
+                        'product_id' => $oldProductId,
+                    ],
+                    [
+                        'product_id' => $oldProductId,
+                        'total_products' => $totalProduct,
+                    ]
+                );
+            }
+
+            $totalProduct = OrderDetail::getTotalProductsById($request->productId);
+            $topProducts = TopProducts::updateOrCreate(
+                [
+                    'product_id' => $request->productId,
+                ],
+                [
+                    'product_id' => $request->productId,
+                    'total_products' => $totalProduct,
+                ]
+            );
+
+            //save top users
+            if ($oldUser != null) {
+                $totalMoney = OrderDetail::getTotalMoneyById($oldUser);
+                $topUsers = TopUsers::updateOrCreate(
+                    [
+                        'user_id' => $oldUser,
+                    ],
+                    [
+                        'user_id' => $oldUser,
+                        'total_money' => $totalMoney,
+                    ]
+                );
+            }
+            if ($user != null) {
+                $totalMoney = OrderDetail::getTotalMoneyById($user);
+                $topUsers = TopUsers::updateOrCreate(
+                    [
+                        'user_id' => $user,
+                    ],
+                    [
+                        'user_id' => $user,
+                        'total_money' => $totalMoney,
+                    ]
+                );
+            }
 
             return $this->responseSuccess("Edit order successfully");
         } catch (\Exception $exception) {
@@ -1462,22 +1530,18 @@ class AdminController extends BaseApiController
     {
         /**
          * @SWG\Delete(
-         *     path="/admin/order/deletePurchasesAdmin",
+         *     path="/admin/order/{id}",
          *     description="Delete purchases admin",
          *     tags={"Admin"},
          *     summary="Delete purchases admin",
          *     security={{"jwt":{}}},
-         *      @SWG\Parameter(
-         *          name="body",
-         *          description="Delete purchases admin",
-         *          required=true,
-         *          in="body",
-         *          @SWG\Schema(
-         *              @SWG\property(
-         *                  property="id",
-         *                  type="integer",
-         *              ),
-         *          ),
+         *     @SWG\Parameter(
+         *         description="ID purchases to delete",
+         *         in="path",
+         *         name="id",
+         *         required=true,
+         *         type="integer",
+         *         format="int64"
          *      ),
          *      @SWG\Response(response=200, description="Successful"),
          *      @SWG\Response(response=401, description="Unauthorized"),
@@ -1489,7 +1553,8 @@ class AdminController extends BaseApiController
          */
 
         try {
-            $validator = OrderDetail::validate($request->all(), 'Delete_Purchases_Admin');
+            $input['id'] = $request->id;
+            $validator = OrderDetail::validate($input, 'Delete_Purchases_Admin');
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
@@ -1497,11 +1562,43 @@ class AdminController extends BaseApiController
             if (!$checkOrderDetail) {
                 return $this->responseErrorCustom("detail_id_not_found", 404);
             }
+            
+            //delete order detail by id
+            $oldProductId = $checkOrderDetail->product_id;
             $orderId = $checkOrderDetail->order_id;
             $checkOrderDetail->delete();
+
+            //save top products
+            $totalProduct = OrderDetail::getTotalProductsById($oldProductId);
+            $topProducts = TopProducts::updateOrCreate(
+                [
+                    'product_id' => $oldProductId,
+                ],
+                [
+                    'product_id' => $oldProductId,
+                    'total_products' => $totalProduct,
+                ]
+            );
+
+            $checkOrderTable = OrderTable::where(['id' => $orderId])->first();
+            $user = $checkOrderTable->user;
+
+            //save top users
+            if ($user != null) {
+                $totalMoney = OrderDetail::getTotalMoneyById($user);
+                $topUsers = TopUsers::updateOrCreate(
+                    [
+                        'user_id' => $user,
+                    ],
+                    [
+                        'user_id' => $user,
+                        'total_money' => $totalMoney,
+                    ]
+                );
+            }
+
             $checkOrderDetailAfter = OrderDetail::where(['order_id' => $orderId])->first();
             if (!$checkOrderDetailAfter) {
-                $checkOrderTable = OrderTable::where(['id' => $orderId])->first();
                 if (!$checkOrderTable) {
                     return $this->responseErrorCustom("order_id_not_found", 404);
                 }
@@ -1509,7 +1606,7 @@ class AdminController extends BaseApiController
                     $checkOrderTable->delete();
                 }
             }
-            return $this->responseSuccess("Delete slide show successfully");
+            return $this->responseSuccess("Delete successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
         }
@@ -1519,10 +1616,11 @@ class AdminController extends BaseApiController
     {
         /**
          * @SWG\Get(
-         *     path="/data/getProductDataChart",
+         *     path="/admin/getProductDataChart",
          *     description="get product data chart",
-         *     tags={"Data"},
+         *     tags={"Admin"},
          *     summary="get product data chart",
+         *     security={{"jwt":{}}},
          *
          *      @SWG\Response(response=200, description="Successful operation"),
          *      @SWG\Response(response=401, description="Unauthorized"),
@@ -1530,8 +1628,31 @@ class AdminController extends BaseApiController
          * )
          */
         try {
-            $dataProductCategory = ProductCategory::getProductCategory();
-            return $this->responseSuccess($dataProductCategory);
+            $result = TopProducts::getProductDataChart();
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
+        }
+    }
+
+    public function getUserDataChart(Request $request)
+    {
+        /**
+         * @SWG\Get(
+         *     path="/admin/getUserDataChart",
+         *     description="get user data chart",
+         *     tags={"Admin"},
+         *     summary="get user data chart",
+         *     security={{"jwt":{}}},
+         *
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+        try {
+            $result = TopUsers::getUserDataChart();
+            return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }

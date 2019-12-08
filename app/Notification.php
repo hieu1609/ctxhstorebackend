@@ -42,32 +42,40 @@ class Notification extends BaseModel
         'Get_Notifications_Admin' => [
             'page' => 'required|integer'
         ],
+        'Get_Notifications' => [
+            'page' => 'required|integer'
+        ],
     );
 
     public static function getNotificationsAdmin($page) {
         $limit = 10;
         $space = ($page - 1) * $limit;
-        return Notification::orderBy('id', 'desc')
-        ->where('user_id_send', 1)
+        return Notification::join('users', 'notification.user_id_receive', '=', 'users.id')
+        ->orderBy('notification.id', 'desc')
+        ->where('notification.user_id_send', 1)
         ->limit($limit)
         ->offset($space)
-        ->get();
+        ->get(['notification.*', 'users.name', 'users.admin']);
     }
 
     public static function getFeedbackAdmin($page) {
         $limit = 10;
         $space = ($page - 1) * $limit;
-        return Notification::orderBy('seen', 'asc')
-        ->where('user_id_receive', 1)
+        return Notification::join('users', 'notification.user_id_send', '=', 'users.id')
+        ->orderBy('notification.seen', 'asc')
+        ->where('notification.user_id_receive', 1)
         ->limit($limit)
         ->offset($space)
-        ->get();
+        ->get(['notification.*', 'users.name', 'users.admin']);
     }
 
-    public static function getNotifications($idUser) {
+    public static function getNotifications($idUser, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return Notification::where('user_id_receive', $idUser)
         ->orderBy('id', 'desc')
-        ->limit(5)
+        ->limit($limit)
+        ->offset($space)
         ->get();
     }
 }

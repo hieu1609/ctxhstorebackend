@@ -1321,7 +1321,7 @@
                 ]
             }
         },
-        "/admin/order/deletePurchasesAdmin": {
+        "/admin/order/{id}": {
             "delete": {
                 "tags": [
                     "Admin"
@@ -1330,17 +1330,12 @@
                 "description": "Delete purchases admin",
                 "parameters": [
                     {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Delete purchases admin",
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID purchases to delete",
                         "required": true,
-                        "schema": {
-                            "properties": {
-                                "id": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -1370,10 +1365,10 @@
                 ]
             }
         },
-        "/data/getProductDataChart": {
+        "/admin/getProductDataChart": {
             "get": {
                 "tags": [
-                    "Data"
+                    "Admin"
                 ],
                 "summary": "get product data chart",
                 "description": "get product data chart",
@@ -1387,7 +1382,37 @@
                     "500": {
                         "description": "Internal Server Error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/admin/getUserDataChart": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "get user data chart",
+                "description": "get user data chart",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
             }
         },
         "/auth/login": {
@@ -2177,7 +2202,7 @@
                 ]
             }
         },
-        "/user/CancelOrder": {
+        "/user/cancelorder/{orderId}": {
             "delete": {
                 "tags": [
                     "User"
@@ -2186,17 +2211,12 @@
                 "description": "Cancel order",
                 "parameters": [
                     {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Cancel order",
+                        "name": "orderId",
+                        "in": "path",
+                        "description": "ID order to delete",
                         "required": true,
-                        "schema": {
-                            "properties": {
-                                "orderId": {
-                                    "type": "integer"
-                                }
-                            }
-                        }
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
@@ -2224,12 +2244,27 @@
             }
         },
         "/user/getNotifications": {
-            "get": {
+            "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "get notifications",
-                "description": "get notifications",
+                "summary": "Get notifications",
+                "description": "Get notifications",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Get notifications",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "page": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"

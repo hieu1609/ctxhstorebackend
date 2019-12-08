@@ -56,10 +56,10 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
         Route::get('getPurchasesShipping', 'UserController@getPurchasesShipping');
         Route::get('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
-        Route::delete('CancelOrder', 'UserController@CancelOrder');
+        Route::delete('cancelorder/{orderId}', 'UserController@CancelOrder');
 
         //Notification
-        Route::get('getNotifications', 'UserController@getNotifications');
+        Route::post('getNotifications', 'UserController@getNotifications');
         Route::post('postFeedback', 'UserController@postFeedback');
         Route::put('seenNotification', 'UserController@seenNotification');
     });
@@ -95,13 +95,17 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('getPurchasesConfirmAdmin', 'AdminController@getPurchasesConfirmAdmin');
         Route::post('getPurchasesShippingAdmin', 'AdminController@getPurchasesShippingAdmin');
         Route::post('getPurchasesCompletedAdmin', 'AdminController@getPurchasesCompletedAdmin');
-        Route::put('/order/editPurchasesAdmin', 'AdminController@editPurchasesAdmin');
-        Route::delete('/order/deletePurchasesAdmin', 'AdminController@deletePurchasesAdmin');
+        Route::put('order/editPurchasesAdmin', 'AdminController@editPurchasesAdmin');
+        Route::delete('order/{id}', 'AdminController@deletePurchasesAdmin');
 
         //Slide show
         Route::post('getSlideShowAdmin', 'AdminController@getSlideShowAdmin');
         Route::post('addSlideShow', 'AdminController@addSlideShow');
         Route::put('slideshow/{slideShowId}', 'AdminController@editSlideShow');
         Route::delete('slideshow/{slideShowId}', 'AdminController@deleteSlideShow');
+
+        //Char
+        Route::get('getProductDataChart', 'AdminController@getProductDataChart');
+        Route::get('getUserDataChart', 'AdminController@getUserDataChart');
     });
 });

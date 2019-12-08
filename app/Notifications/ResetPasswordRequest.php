@@ -42,14 +42,7 @@ class ResetPasswordRequest extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = '';
-        if ($this->admin) {
-            $url = url('https://maxdino-dashboard.herokuapp.com/accept/reset-password/' . $this->token);
-            //send link redirect to page CMS - Admin
-        } else {
-            $url = url('http://localhost:3000/accept/reset-password/' . $this->token);
-        }
-
+        $url = url('http://localhost:800/accept/reset-password/' . $this->token);
         return (new MailMessage)
             ->subject('<CTXH Store> Reset password link')
             ->line('Press the link below to reset your password.')
