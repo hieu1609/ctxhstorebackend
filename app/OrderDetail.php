@@ -25,6 +25,9 @@ class OrderDetail extends BaseModel
         'Get_Purchases_Admin' => [
             'page' => 'required|integer'
         ],
+        'Get_Purchases' => [
+            'page' => 'required|integer'
+        ],
         'Edit_Purchases_Admin' => [
             'id' => 'required|integer',
             'orderId' => 'required|integer',
@@ -43,45 +46,70 @@ class OrderDetail extends BaseModel
         ],
     );
 
-    public static function getAllPurchases($userId) {
+    public static function getAllPurchases($userId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
+        ->orderBy('order_detail.id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
-    public static function getPurchasesReceived($userId) {
+    public static function getPurchasesReceived($userId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
         ->where('order_detail.confirm', 0)
         ->where('order_detail.shipping', 0)
         ->where('order_detail.success', 0)
+        ->orderBy('order_detail.id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
-    public static function getPurchasesConfirm($userId) {
+    public static function getPurchasesConfirm($userId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
         ->where('order_detail.confirm', 1)
         ->where('order_detail.shipping', 0)
         ->where('order_detail.success', 0)
+        ->orderBy('order_detail.id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
-    public static function getPurchasesShipping($userId) {
+    public static function getPurchasesShipping($userId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
         ->where('order_detail.confirm', 1)
         ->where('order_detail.shipping', 1)
         ->where('order_detail.success', 0)
+        ->orderBy('order_detail.id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
-    public static function getPurchasesCompleted($userId) {
+    public static function getPurchasesCompleted($userId, $page) {
+        $limit = 5;
+        $space = ($page - 1) * $limit;
         return OrderDetail::join('order_table', 'order_detail.order_id', '=', 'order_table.id')
         ->where('order_table.user', $userId)
         ->where('order_detail.confirm', 1)
         ->where('order_detail.shipping', 1)
         ->where('order_detail.success', 1)
+        ->orderBy('order_detail.id', 'desc')
+        ->limit($limit)
+        ->offset($space)
         ->get(['order_detail.*', 'order_table.name', 'order_table.phone', 'order_table.address', 'order_table.email', 'order_table.user']);
     }
 
