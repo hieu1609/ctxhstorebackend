@@ -217,6 +217,32 @@ class AdminController extends BaseApiController
         }
     }
 
+    public function getAllUserAdmin(Request $request)
+    {
+        /**
+         * @SWG\Get(
+         *     path="/admin/getAllUserAdmin",
+         *     description="Get all user",
+         *     tags={"Admin"},
+         *     summary="Get all user",
+         *     security={{"jwt":{}}},
+         * 
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $result = User::get();
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
+        }
+    }
+
     public function getUserAdmin(Request $request)
     {
         /**

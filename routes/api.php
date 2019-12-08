@@ -69,6 +69,7 @@ Route::group(['prefix' => 'user'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::middleware(['jwt', 'admin'])->group(function () {
         //User
+        Route::get('getAllUserAdmin', 'AdminController@getAllUserAdmin');
         Route::post('getUserAdmin', 'AdminController@getUserAdmin');
         Route::get('all-user', 'AdminController@getAllUser');
         Route::post('addUser', 'AdminController@addUser');
