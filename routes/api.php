@@ -51,11 +51,11 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('postReview', 'UserController@postReview');
 
         //Purchases
-        Route::get('getAllPurchases', 'UserController@getAllPurchases');
-        Route::get('getPurchasesReceived', 'UserController@getPurchasesReceived');
-        Route::get('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
-        Route::get('getPurchasesShipping', 'UserController@getPurchasesShipping');
-        Route::get('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
+        Route::post('getAllPurchases', 'UserController@getAllPurchases');
+        Route::post('getPurchasesReceived', 'UserController@getPurchasesReceived');
+        Route::post('getPurchasesConfirm', 'UserController@getPurchasesConfirm');
+        Route::post('getPurchasesShipping', 'UserController@getPurchasesShipping');
+        Route::post('getPurchasesCompleted', 'UserController@getPurchasesCompleted');
         Route::delete('cancelorder/{orderId}', 'UserController@CancelOrder');
 
         //Notification
