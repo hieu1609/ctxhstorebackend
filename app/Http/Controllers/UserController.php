@@ -267,25 +267,21 @@ class UserController extends BaseApiController
         }
     }
 
-     /**
+    /**
      * @SWG\Delete(
-     *     path="/user/CancelOrder",
+     *     path="/user/cancelorder/{orderId}",
      *     description="Cancel order",
      *     tags={"User"},
      *     summary="Cancel order",
      *     security={{"jwt":{}}},
      *      @SWG\Parameter(
-     *          name="body",
-     *          description="Cancel order",
-     *          required=true,
-     *          in="body",
-     *          @SWG\Schema(
-     *              @SWG\property(
-     *                  property="orderId",
-     *                  type="integer",
-     *              ),
-     *          ),
-     *      ),
+     *         description="ID order to delete",
+     *         in="path",
+     *         name="orderId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
      *      @SWG\Response(response=200, description="Successful operation"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -297,7 +293,8 @@ class UserController extends BaseApiController
     public function CancelOrder(Request $request)
     {
         try {
-            $validator = OrderDetail::validate($request->all(), 'Cancel_Order');
+            $input['orderId'] = $request->orderId;
+            $validator = OrderDetail::validate($input, 'Cancel_Order');
             if ($validator) {
                 return $this->responseErrorValidator($validator, 422);
             }
@@ -330,13 +327,24 @@ class UserController extends BaseApiController
     public function getNotifications(Request $request)
     {
         /**
-         * @SWG\Get(
+         * @SWG\Post(
          *     path="/user/getNotifications",
-         *     description="get notifications",
+         *     description="Get notifications",
          *     tags={"User"},
-         *     summary="get notifications",
+         *     summary="Get notifications",
          *     security={{"jwt":{}}},
-         *
+         *     @SWG\Parameter(
+         *          name="body",
+         *          description="Get notifications",
+         *          required=true,
+         *          in="body",
+         *          @SWG\Schema(
+         *              @SWG\property(
+         *                  property="page",
+         *                  type="integer",
+         *              ),
+         *          ),
+         *      ),
          *      @SWG\Response(response=200, description="Successful operation"),
          *      @SWG\Response(response=401, description="Unauthorized"),
          *      @SWG\Response(response=500, description="Internal Server Error"),
@@ -344,8 +352,12 @@ class UserController extends BaseApiController
          */
 
         try {
-            $dataNotifications = Notification::getNotifications($request->user->id);
-            return $this->responseSuccess($dataNotifications);
+            $validator = Notification::validate($request->all(), 'Get_Notifications');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result = Notification::getNotifications($request->user->id, $request->page);
+            return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }

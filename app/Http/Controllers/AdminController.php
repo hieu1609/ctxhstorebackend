@@ -11,6 +11,7 @@ use App\OrderDetail;
 use App\OrderTable;
 use App\TopUsers;
 use App\TopProducts;
+use App\ProductReviews;
 use Illuminate\Http\Request;
 
 class AdminController extends BaseApiController
@@ -213,6 +214,32 @@ class AdminController extends BaseApiController
             return $this->responseSuccess("Delete slide show successfully");
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
+        }
+    }
+
+    public function getAllUserAdmin(Request $request)
+    {
+        /**
+         * @SWG\Get(
+         *     path="/admin/getAllUserAdmin",
+         *     description="Get all user",
+         *     tags={"Admin"},
+         *     summary="Get all user",
+         *     security={{"jwt":{}}},
+         * 
+         *      @SWG\Response(response=200, description="Successful operation"),
+         *      @SWG\Response(response=401, description="Unauthorized"),
+         *      @SWG\Response(response=403, description="Forbidden"),
+         *      @SWG\Response(response=422, description="Unprocessable Entity"),
+         *      @SWG\Response(response=500, description="Internal Server Error"),
+         * )
+         */
+
+        try {
+            $result = User::get();
+            return $this->responseSuccess($result);
+        } catch (\Exception $exception) {
+            return $this->responseErrorException($exception->getMessage(), $exception->getCode(), 500);
         }
     }
 
@@ -446,6 +473,31 @@ class AdminController extends BaseApiController
             $user = User::where(['id' => $userId])->first();
             if (!$user) {
                 return $this->responseErrorCustom("users_not_found", 404);
+            }
+
+            $orderTable = OrderTable::where(['user' => $userId])->first();
+            if ($orderTable) {
+                return $this->responseErrorCustom("already_in_order_table", 403);
+            }
+
+            $productReview = ProductReviews::where(['user_id' => $userId])->first();
+            if ($productReview) {
+                return $this->responseErrorCustom("already_in_product_reviews_table", 403);
+            }
+
+            $notifications = Notification::where(['user_id_send' => $userId])->first();
+            if ($notifications) {
+                return $this->responseErrorCustom("already_in_notification_table", 403);
+            }
+
+            $notificationr = Notification::where(['user_id_receive' => $userId])->first();
+            if ($notificationr) {
+                return $this->responseErrorCustom("already_in_notification_table", 403);
+            }
+
+            $topUser = TopUsers::where(['user_id' => $userId])->first();
+            if ($topUser) {
+                $topUser->delete();
             }
 
             $countAdmin = User::where(['admin' => 1])->count();
@@ -1118,14 +1170,14 @@ class AdminController extends BaseApiController
          *     tags={"Admin"},
          *     summary="Delete product",
          *     security={{"jwt":{}}},
-         *      @SWG\Parameter(
+         *     @SWG\Parameter(
          *         description="ID product to delete",
          *         in="path",
          *         name="productId",
          *         required=true,
          *         type="integer",
          *         format="int64"
-         *     ),
+         *      ),
          *      @SWG\Response(response=200, description="Successful"),
          *      @SWG\Response(response=401, description="Unauthorized"),
          *      @SWG\Response(response=403, description="Forbidden"),
@@ -1148,6 +1200,14 @@ class AdminController extends BaseApiController
             $checkOrderProduct = OrderDetail::where(['product_id' => $request->productId])->first();
             if ($checkOrderProduct) {
                 return $this->responseErrorCustom("could_not_delete_product", 403);
+            }
+            $productReview = ProductReviews::where(['product_id' => $request->productId])->first();
+            if ($productReview) {
+                return $this->responseErrorCustom("already_in_product_reviews_table", 403);
+            }
+            $topProduct = TopProducts::where(['product_id' => $request->productId])->first();
+            if ($topProduct) {
+                $topProduct->delete();
             }
             $checkProductId->delete();
             return $this->responseSuccess("Delete product successfully");
