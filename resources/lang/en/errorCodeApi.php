@@ -211,6 +211,10 @@ $ApiErrorMessages = array(
     'productNumber_min' => 'The product number min is 1.',
     'productNumber_max' => 'The product number max is 10.',
     'notification_id_not_found' => 'Notification id not found',
+
+    'already_in_order_table' => 'Already in order table.',
+    'already_in_product_reviews_table' => 'Already in product reviews table.',
+    'already_in_notification_table' => 'Already in notification table.',
 );
 
 $ApiErrorCodes = array(
@@ -379,6 +383,10 @@ $ApiErrorCodes = array(
     'id_integer' => 3401,
     'productNumber_min' => 3402,
     'productNumber_max' => 3403,
+
+    'already_in_order_table' => 3404,
+    'already_in_product_reviews_table' => 3405,
+    'already_in_notification_table' => 3406,
 
     //custom error
     'email_password_invalid' => 8000,

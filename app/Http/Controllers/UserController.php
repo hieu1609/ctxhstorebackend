@@ -143,12 +143,24 @@ class UserController extends BaseApiController
     }
 
     /**
-     * @SWG\Get(
+     * @SWG\Post(
      *     path="/user/getAllPurchases",
      *     description="Get all purchases",
      *     tags={"User"},
      *     summary="Get all purchases",
      *     security={{"jwt":{}}},
+     *     @SWG\Parameter(
+     *          name="body",
+     *          description="Get all purchases",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(
+     *              @SWG\property(
+     *                  property="page",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
      *      @SWG\Response(response=200, description="Successful"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -159,8 +171,11 @@ class UserController extends BaseApiController
     public function getAllPurchases(Request $request)
     {
         try {
-            $result = OrderDetail::getAllPurchases($request->user->id);
-
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result = OrderDetail::getAllPurchases($request->user->id, $request->page);
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
@@ -168,12 +183,24 @@ class UserController extends BaseApiController
     }
 
     /**
-     * @SWG\Get(
+     * @SWG\Post(
      *     path="/user/getPurchasesReceived",
      *     description="Get purchases received",
      *     tags={"User"},
      *     summary="Get purchases received",
      *     security={{"jwt":{}}},
+     *     @SWG\Parameter(
+     *          name="body",
+     *          description="Get purchases received",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(
+     *              @SWG\property(
+     *                  property="page",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
      *      @SWG\Response(response=200, description="Successful"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -184,8 +211,11 @@ class UserController extends BaseApiController
     public function getPurchasesReceived(Request $request)
     {
         try {
-            $result = OrderDetail::getPurchasesReceived($request->user->id);
-
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result = OrderDetail::getPurchasesReceived($request->user->id, $request->page);
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
@@ -193,12 +223,24 @@ class UserController extends BaseApiController
     }
 
     /**
-     * @SWG\Get(
+     * @SWG\Post(
      *     path="/user/getPurchasesConfirm",
      *     description="Get purchases confirm",
      *     tags={"User"},
      *     summary="Get purchases confirm",
      *     security={{"jwt":{}}},
+     *     @SWG\Parameter(
+     *          name="body",
+     *          description="Get purchases confirm",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(
+     *              @SWG\property(
+     *                  property="page",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
      *      @SWG\Response(response=200, description="Successful"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -209,8 +251,11 @@ class UserController extends BaseApiController
     public function getPurchasesConfirm(Request $request)
     {
         try {
-            $result = OrderDetail::getPurchasesConfirm($request->user->id);
-
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result = OrderDetail::getPurchasesConfirm($request->user->id, $request->page);
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
@@ -218,12 +263,24 @@ class UserController extends BaseApiController
     }
 
     /**
-     * @SWG\Get(
+     * @SWG\Post(
      *     path="/user/getPurchasesShipping",
      *     description="Get purchases shipping",
      *     tags={"User"},
      *     summary="Get purchases shipping",
      *     security={{"jwt":{}}},
+     *     @SWG\Parameter(
+     *          name="body",
+     *          description="Get purchases shipping",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(
+     *              @SWG\property(
+     *                  property="page",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
      *      @SWG\Response(response=200, description="Successful"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -234,8 +291,11 @@ class UserController extends BaseApiController
     public function getPurchasesShipping(Request $request)
     {
         try {
-            $result = OrderDetail::getPurchasesShipping($request->user->id);
-
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result = OrderDetail::getPurchasesShipping($request->user->id, $request->page);
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
@@ -243,12 +303,24 @@ class UserController extends BaseApiController
     }
 
     /**
-     * @SWG\Get(
+     * @SWG\Post(
      *     path="/user/getPurchasesCompleted",
      *     description="Get purchases completed",
      *     tags={"User"},
      *     summary="Get purchases completed",
      *     security={{"jwt":{}}},
+     *     @SWG\Parameter(
+     *          name="body",
+     *          description="Get purchases completed",
+     *          required=true,
+     *          in="body",
+     *          @SWG\Schema(
+     *              @SWG\property(
+     *                  property="page",
+     *                  type="integer",
+     *              ),
+     *          ),
+     *      ),
      *      @SWG\Response(response=200, description="Successful"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=403, description="Forbidden"),
@@ -259,8 +331,11 @@ class UserController extends BaseApiController
     public function getPurchasesCompleted(Request $request)
     {
         try {
-            $result = OrderDetail::getPurchasesCompleted($request->user->id);
-
+            $validator = OrderDetail::validate($request->all(), 'Get_Purchases');
+            if ($validator) {
+                return $this->responseErrorValidator($validator, 422);
+            }
+            $result = OrderDetail::getPurchasesCompleted($request->user->id, $request->page);
             return $this->responseSuccess($result);
         } catch (\Exception $exception) {
             return $this->responseErrorException($exception->getMessage(), 99999, 500);
