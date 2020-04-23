@@ -16,7 +16,7 @@ class Controller extends BaseController
  * @SWG\Swagger(
  *     basePath="/api",
  *     schemes={"http", "https"},
- *     host="localhost:80/ctxhstore/public",
+ *     host="localhost:800/ctxhstorebackend/public",
  *     @SWG\Info(
  *         version="1.0.0",
  *         title="L5 Swagger API"

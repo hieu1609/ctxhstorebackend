@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 
 class BaseModel extends Model
 {
-    //
     public static function validate($input = array(), $ruleName = '', $messages = array())
     {
         $rules = static::$rules[$ruleName];

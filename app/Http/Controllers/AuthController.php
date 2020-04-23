@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Mockery\CountValidator\Exception;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Mime\Email;
